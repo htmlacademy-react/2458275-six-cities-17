@@ -1,3 +1,3 @@
 export const Setting = {
-  offerCardsCount: 5
+  placeCardsCount: 5
 };

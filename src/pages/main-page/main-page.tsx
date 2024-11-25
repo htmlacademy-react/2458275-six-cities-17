@@ -1,10 +1,10 @@
-import OfferCard from '../../components/offer-card/offer-card';
+import PlaceCard from '../../components/place-card/place-card';
 
 type MainPageProps = {
-  offerCardsCount: number;
+  placeCardsCount: number;
 }
 
-function MainPage({offerCardsCount}: MainPageProps): JSX.Element {
+function MainPage({placeCardsCount}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -95,7 +95,7 @@ function MainPage({offerCardsCount}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {[...Array<number>(offerCardsCount)].map(() => <OfferCard key={Math.random()}/>)}
+                {[...Array<number>(placeCardsCount)].map(() => <PlaceCard key={Math.random()}/>)}
               </div>
             </section>
             <div className="cities__right-section">
