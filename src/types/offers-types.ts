@@ -9,7 +9,7 @@ export type OfferCity = {
     location: Location;
 };
 
-export type Offers = {
+export type Offer = {
   id: string;
   title: string;
   type: string;
@@ -20,5 +20,5 @@ export type Offers = {
   isPremium: boolean;
   rating: number;
   previewImage: string;
-  }
+  };
 
