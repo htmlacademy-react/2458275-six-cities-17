@@ -1,15 +1,12 @@
 import Header from '../../components/header/header';
-import PlaceCard from '../../components/place-card/place-card';
-import {Comment} from '../../types/comments-types';
+import OffersList from '../../components/offers-list/offers-list';
 import {Offer} from '../../types/offers-types';
 
 type MainPageProps = {
-  placeCardsCount: number;
-  comments: Comment[];
   offers: Offer[];
 }
 
-function MainPage({placeCardsCount, offers, comments}: MainPageProps): JSX.Element {
+function MainPage({offers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -71,9 +68,7 @@ function MainPage({placeCardsCount, offers, comments}: MainPageProps): JSX.Eleme
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {[...Array<number>(placeCardsCount)].map(() => <PlaceCard key={Math.random()}/>)}
-              </div>
+              <OffersList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

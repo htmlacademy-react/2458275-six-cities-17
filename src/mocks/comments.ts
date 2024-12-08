@@ -1,6 +1,6 @@
 import {Comment} from '../types/comments-types';
 
-import {AVATAR_URL} from '../utils/consts';
+import {AVATAR_URL} from '../consts';
 
 export const comments: Comment[] = [
   {

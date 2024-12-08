@@ -1,7 +1,7 @@
 import {Offer} from '../../types/offers-types';
 import {getRatingStarsCount} from '../../utils/common';
 
-function PlaceCard({id, title, type, price, city, location, isFavorite, isPremium, rating, previewImage}: Offer): JSX.Element {
+function PlaceCard({title, type, price, isPremium, rating, previewImage}: Offer): JSX.Element {
   return (
     <article className="cities__card place-card">
       {isPremium && (

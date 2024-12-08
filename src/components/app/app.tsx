@@ -7,22 +7,19 @@ import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {Comment} from '../../types/comments-types';
 import {Offer} from '../../types/offers-types';
 
 type AppProps = {
-  placeCardsCount: number;
-  comments: Comment[];
   offers: Offer[];
 }
 
-function App({placeCardsCount, comments, offers}: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage placeCardsCount={placeCardsCount} offers={offers} />}
+          element={<MainPage offers={offers} />}
         />
         <Route
           path={AppRoute.Favorites}
