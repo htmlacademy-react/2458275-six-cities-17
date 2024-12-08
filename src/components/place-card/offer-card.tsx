@@ -1,9 +1,18 @@
 import {Offer} from '../../types/offers-types';
 import {getRatingStarsCount} from '../../utils/common';
 
-function PlaceCard({title, type, price, isPremium, rating, previewImage}: Offer): JSX.Element {
+type OfferCardProps = {
+  offer: Offer;
+  onActiveOfferCardChange?: (id: string | null) => void;
+}
+
+function OfferCard({offer, onActiveOfferCardChange}: OfferCardProps): JSX.Element {
+  const {title, type, price, isPremium, rating, previewImage} = offer;
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card"
+      onMouseEnter={() => onActiveOfferCardChange && onActiveOfferCardChange(offer.id)}
+      onMouseLeave={() => onActiveOfferCardChange && onActiveOfferCardChange(null)}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -42,4 +51,4 @@ function PlaceCard({title, type, price, isPremium, rating, previewImage}: Offer)
   );
 }
 
-export default PlaceCard;
+export default OfferCard;
