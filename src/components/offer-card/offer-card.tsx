@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offers-types';
-import {getRatingStarsCount} from '../../utils/common';
+import {capitalize, getRatingStarsCount} from '../../utils/common';
 import {AppRoute} from '../../consts';
 
 type OfferCardProps = {
@@ -54,7 +54,7 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
     </article>
   );

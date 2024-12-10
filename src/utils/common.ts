@@ -1,5 +1,7 @@
 import {Offer} from '../types/offers-types';
 
+const capitalize = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
+
 const getRatingStarsCount = (rating: number): string => {
   const ratingProcents = `${Math.round(rating) * 20}%`;
   return ratingProcents;
@@ -14,4 +16,4 @@ const groupOffersByCity = (offers: Offer[]) => offers.reduce((groupedOffers: Rec
 }, {});
 
 
-export {getRatingStarsCount, groupOffersByCity};
+export {capitalize, getRatingStarsCount, groupOffersByCity};
