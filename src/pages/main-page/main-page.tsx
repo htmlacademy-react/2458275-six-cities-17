@@ -9,9 +9,10 @@ type MainPageProps = {
 
 function MainPage({offers}: MainPageProps): JSX.Element {
   const [activeOfferCard, setActiveOfferCard] = useState<string | null>(null);
-
   const handleActiveOfferCardChange = (id: string | null) => {
-    setActiveOfferCard(id);
+    if (id !== activeOfferCard) {
+      setActiveOfferCard(id);
+    }
   };
   return (
     <div className="page page--gray page--main">
@@ -58,7 +59,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} {offers.length === 1 ? 'place' : 'places'} to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -74,7 +75,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={offers}/>
+              <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={offers} cardType='cities'/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

@@ -1,6 +1,6 @@
 import {Offer} from '../types/offers-types';
 
-export const offers: Offer[] = [
+export const MOCK_OFFERS: Offer[] = [
   {
     'id': '33c68a72-47cc-467b-be9e-908d63a1622d',
     'title': 'Penthouse, 4-5 rooms + 5 balconies',
@@ -20,7 +20,7 @@ export const offers: Offer[] = [
       'longitude': 4.902976,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 2.2
   },
@@ -66,7 +66,7 @@ export const offers: Offer[] = [
       'longitude': 4.881976,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 5
   },
@@ -89,7 +89,7 @@ export const offers: Offer[] = [
       'longitude': 4.883976,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 3.4
   },

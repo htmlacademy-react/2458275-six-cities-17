@@ -2,7 +2,7 @@ import {Comment} from '../types/comments-types';
 
 import {AVATAR_URL} from '../consts';
 
-export const comments: Comment[] = [
+export const MOCK_COMMENTS: Comment[] = [
   {
     'id': '5eddee8f-811e-4a4c-8494-edc8ae82f63c',
     'comment': 'Beautiful space, fantastic location and atmosphere, really a wonderful place to spend a few days. Will be back.',
