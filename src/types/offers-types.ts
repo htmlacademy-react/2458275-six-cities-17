@@ -5,14 +5,14 @@ export type Location = {
 };
 
 export type OfferCity = {
-    name: string;
+    name: 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
     location: Location;
 };
 
 export type Offer = {
   id: string;
   title: string;
-  type: string;
+  type: 'apartment' | 'room' | 'house' | 'hotel';
   price: number;
   city: OfferCity;
   location: Location;
