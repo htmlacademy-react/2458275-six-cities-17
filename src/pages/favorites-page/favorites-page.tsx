@@ -1,6 +1,7 @@
+import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offers-types';
-import FavouritePlacesList from '../../components/favourite-places-list/favourite-places-list';
+import FavoritePlacesList from '../../components/favorite-places-list/favorite-places-list';
 
 type FavoritesPageProps = {
   offers: Offer[];
@@ -8,12 +9,15 @@ type FavoritesPageProps = {
 function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities: Favorites</title>
+      </Helmet>
       <Header/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavouritePlacesList offers={offers} cardType='favourites'/>
+            <FavoritePlacesList offers={offers} cardType='favorites'/>
           </section>
         </div>
       </main>

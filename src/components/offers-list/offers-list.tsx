@@ -9,7 +9,7 @@ type OffersListProps = {
 
 function OffersList({offers, cardType, onActiveOfferCardChange}: OffersListProps): JSX.Element {
   return (
-    <div className={cardType === 'favourites' ? 'favorites__places' : 'cities__places-list places__list tabs__content'}>
+    <div className={cardType === 'favorites' ? 'favorites__places' : 'cities__places-list places__list tabs__content'}>
       {
         offers.map((offer) => (
           <OfferCard

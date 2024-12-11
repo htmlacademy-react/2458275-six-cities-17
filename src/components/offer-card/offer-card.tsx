@@ -26,13 +26,13 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
           <img
             className="place-card__image"
             src={previewImage}
-            width={cardType === 'favourites' ? 150 : 260}
-            height={cardType === 'favourites' ? 110 : 200}
+            width={cardType === 'favorites' ? 150 : 260}
+            height={cardType === 'favorites' ? 110 : 200}
             alt="Place image"
           />
         </Link>
       </div>
-      <div className={cardType === 'favourites' ? 'favorites__card-info place-card__info' : 'place-card__info'}>
+      <div className={cardType === 'favorites' ? 'favorites__card-info place-card__info' : 'place-card__info'}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
