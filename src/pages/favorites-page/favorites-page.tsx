@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../consts';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offers-types';
@@ -22,7 +24,7 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={AppRoute.Main}>
           <img
             className="footer__logo"
             src="img/logo.svg"
@@ -30,7 +32,7 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
             width={64}
             height={33}
           />
-        </a>
+        </Link>
       </footer>
     </div>
   );

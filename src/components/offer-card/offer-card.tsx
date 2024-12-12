@@ -52,7 +52,7 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={AppRoute.Offer}>{title}</Link>
         </h2>
         <p className="place-card__type">{capitalize(type)}</p>
       </div>
