@@ -16,3 +16,33 @@ export enum AuthorizationStatus {
 }
 
 export const AVATAR_URL = 'https://i.pravatar.cc/128';
+
+export const RATINGS = [
+  {
+    value: 5,
+    title: 'perfect',
+  },
+  {
+    value: 4,
+    title: 'good',
+  },
+  {
+    value: 3,
+    title: 'not bad',
+  },
+  {
+    value: 2,
+    title: 'badly',
+  },
+  {
+    value: 1,
+    title: 'terribly',
+  }
+];
+export const Comment = {
+  MinLength: 50,
+  MaxLength: 300,
+  InitialState: ' ',
+};
+
+export const RATING_INITIAL_VALUE = 0;
