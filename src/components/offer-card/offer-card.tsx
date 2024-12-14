@@ -10,7 +10,7 @@ type OfferCardProps = {
 }
 
 function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): JSX.Element {
-  const {title, type, price, isPremium, rating, previewImage, isFavorite} = offer;
+  const {title, type, price, isPremium, rating, previewImage, isFavorite, id} = offer;
   return (
     <article className={`${cardType}__card place-card`}
       onMouseEnter={() => onActiveOfferCardChange && onActiveOfferCardChange(offer.id)}
@@ -22,7 +22,7 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
         </div>
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={AppRoute.Offer}>
+        <Link to={AppRoute.Offer.replace(':id', id)}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -52,7 +52,7 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>{title}</Link>
+          <Link to={AppRoute.Offer.replace(':id', id)}>{title}</Link>
         </h2>
         <p className="place-card__type">{capitalize(type)}</p>
       </div>
