@@ -16,9 +16,6 @@ function Map({cityLocation, offers, activeOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation);
 
-  const defaultCustomIcon = leaflet.icon(MapIcon.Default);
-  const currentCustomIcon = leaflet.icon(MapIcon.Active);
-
   useEffect(() => {
     if (map) {
       offers.forEach((offer) => {
@@ -27,12 +24,12 @@ function Map({cityLocation, offers, activeOffer}: MapProps): JSX.Element {
             lat: offer.location.latitude,
             lng: offer.location.longitude,
           }, {
-            icon: offer.id === activeOffer ? currentCustomIcon : defaultCustomIcon,
+            icon: offer.id === activeOffer ? leaflet.icon(MapIcon.Active) : leaflet.icon(MapIcon.Default),
           })
           .addTo(map);
       });
     }
-  }, [map, offers, activeOffer, currentCustomIcon, defaultCustomIcon]);
+  }, [map, offers, activeOffer]);
 
   return (
     <section
