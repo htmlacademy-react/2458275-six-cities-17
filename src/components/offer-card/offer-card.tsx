@@ -13,7 +13,7 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
   const {title, type, price, isPremium, rating, previewImage, isFavorite, id} = offer;
   return (
     <article className={`${cardType}__card place-card`}
-      onMouseEnter={() => onActiveOfferCardChange && onActiveOfferCardChange(offer.id)}
+      onMouseEnter={() => onActiveOfferCardChange && onActiveOfferCardChange(id)}
       onMouseLeave={() => onActiveOfferCardChange && onActiveOfferCardChange(null)}
     >
       {isPremium && (
