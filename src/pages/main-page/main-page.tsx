@@ -4,6 +4,7 @@ import {useState} from 'react';
 import {Offer} from '../../types/offers-types';
 import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
+import Map from '../../components/map/map';
 
 type MainPageProps = {
   offers: Offer[];
@@ -83,7 +84,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
               <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={offers} cardType='cities'/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map offers={offers} />
             </div>
           </div>
         </div>

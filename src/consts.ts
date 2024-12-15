@@ -45,4 +45,20 @@ export const Comment = {
   InitialState: ' ',
 };
 
+export const MapIconInfo = {
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39]
+};
+
+export const MapIcon = {
+  Default: {
+    iconUrl: 'img/pin.svg',
+    MapIconInfo
+  },
+  Active: {
+    iconUrl: 'img/pin-active.svg',
+    MapIconInfo
+  },
+};
+
 export const RATING_INITIAL_VALUE = 0;
