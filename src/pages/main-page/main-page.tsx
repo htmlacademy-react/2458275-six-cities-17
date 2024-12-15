@@ -1,13 +1,26 @@
+import {Helmet} from 'react-helmet-async';
+import {useState} from 'react';
+
+import {Offer} from '../../types/offers-types';
 import Header from '../../components/header/header';
-import PlaceCard from '../../components/place-card/place-card';
+import OffersList from '../../components/offers-list/offers-list';
 
 type MainPageProps = {
-  placeCardsCount: number;
+  offers: Offer[];
 }
 
-function MainPage({placeCardsCount}: MainPageProps): JSX.Element {
+function MainPage({offers}: MainPageProps): JSX.Element {
+  const [activeOfferCard, setActiveOfferCard] = useState<string | null>(null);
+  const handleActiveOfferCardChange = (id: string | null) => {
+    if (id !== activeOfferCard) {
+      setActiveOfferCard(id);
+    }
+  };
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 cities</title>
+      </Helmet>
       <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -51,7 +64,7 @@ function MainPage({placeCardsCount}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} {offers.length === 1 ? 'place' : 'places'} to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -67,9 +80,7 @@ function MainPage({placeCardsCount}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {[...Array<number>(placeCardsCount)].map(() => <PlaceCard key={Math.random()}/>)}
-              </div>
+              <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={offers} cardType='cities'/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
