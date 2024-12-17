@@ -1,6 +1,6 @@
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-export const CITY_LOCATIONS = [
+export const CITY_DETAILS = [
   {
     name: 'Paris',
     location: {

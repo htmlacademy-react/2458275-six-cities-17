@@ -5,7 +5,7 @@ import {Offer} from '../../types/offers-types';
 import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
-import {CITY_LOCATIONS, CITIES} from '../../consts';
+import {CITY_DETAILS} from '../../consts';
 
 type MainPageProps = {
   offers: Offer[];
@@ -19,8 +19,9 @@ function MainPage({offers}: MainPageProps): JSX.Element {
     }
   };
 
-  const currentCity = CITY_LOCATIONS.find((city) => city.name === CITIES[3]);
-  const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
+  const currentCityDetails = CITY_DETAILS[3];
+
+  const cityOffers = offers.filter((offer) => offer.city.name === currentCityDetails.name);
 
   return (
     <div className="page page--gray page--main">
@@ -89,7 +90,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
               <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={offers} cardType='cities'/>
             </section>
             <div className="cities__right-section">
-              <Map offers={cityOffers} cityLocation={currentCity.location} activeOffer={activeOfferCard}/>
+              <Map offers={cityOffers} cityLocation={currentCityDetails.location} activeOffer={activeOfferCard}/>
             </div>
           </div>
         </div>
