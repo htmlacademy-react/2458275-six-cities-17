@@ -25,9 +25,8 @@ function ReviewForm():JSX.Element {
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
     const {value} = e.target;
-    setFormData(e.target.type === 'textarea' ? {...formData, comment: value} : {...formData, rating: Number(value)});
+    setFormData(e.target.name === 'review' ? {...formData, comment: value} : {...formData, rating: Number(value)});
   };
-
   return (
     <form
       className="reviews__form form"
