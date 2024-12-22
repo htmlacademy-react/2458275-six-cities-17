@@ -1,3 +1,4 @@
+import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offers-types';
@@ -5,6 +6,8 @@ import {Review} from '../../types/reviews-types';
 import OffersList from '../../components/offers-list/offers-list';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
+import Map from '../../components/map/map';
+import {CITY_DETAILS, CardType, MapTypes, OfferCardCount} from '../../consts';
 
 type OfferPageProps = {
   offers: Offer[];
@@ -12,6 +15,13 @@ type OfferPageProps = {
 }
 
 function OfferPage({offers, reviews}: OfferPageProps): JSX.Element {
+  const params = useParams();
+  const activeOfferId = params.id;
+  const currentCityDetails = CITY_DETAILS[3];
+  const nearPlaces = offers.filter((offer) => offer.id !== activeOfferId).slice(OfferCardCount.Min, OfferCardCount.Max);
+  const activeOfferDetails = offers.filter((offer) => offer.id === activeOfferId);
+  const displayedOffers = [...nearPlaces, ...activeOfferDetails];
+
   return (
     <div className="page">
       <Helmet>
@@ -154,7 +164,7 @@ function OfferPage({offers, reviews}: OfferPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map" />
+          <Map offers={displayedOffers} cityLocation={currentCityDetails.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -162,7 +172,7 @@ function OfferPage({offers, reviews}: OfferPageProps): JSX.Element {
           Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              <OffersList offers={offers} cardType='near-places'/>
+              <OffersList offers={nearPlaces} cardType={CardType.Offer}/>
             </div>
           </section>
         </div>

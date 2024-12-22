@@ -3,17 +3,7 @@ import {Review} from '../types/reviews-types';
 import {AVATAR_URL} from '../consts';
 
 export const MOCK_REVIEWS: Review[] = [
-  {
-    'id': '5eddee8f-811e-4a4c-8494-edc8ae82f63c',
-    'comment': 'Beautiful space, fantastic location and atmosphere, really a wonderful place to spend a few days. Will be back.',
-    'date': '2024-11-12T21:00:00.743Z',
-    'rating': 4,
-    'user': {
-      'name': 'Mollie',
-      'avatarUrl': `${AVATAR_URL}?rnd=${Math.random()}`,
-      'isPro': false
-    }
-  },
+
   {
     'id': '5eddee8f-811e-4a4c-8494-edc8ae82f63c',
     'comment': 'Beautiful space, fantastic location and atmosphere, really a wonderful place to spend a few days. Will be back.',
