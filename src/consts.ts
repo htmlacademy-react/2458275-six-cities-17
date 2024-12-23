@@ -68,6 +68,17 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum MapTypes {
+  Main = 'cities',
+  Offer = 'offer',
+}
+
+export enum CardType {
+  Main = 'cities',
+  Offer = 'near-places',
+  Favourites = 'favorites',
+}
+
 export const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 export const RATINGS = [
@@ -96,6 +107,11 @@ export const Comment = {
   MinLength: 50,
   MaxLength: 300,
   InitialState: ' ',
+};
+
+export const OfferCardCount = {
+  Min: 0,
+  Max: 3,
 };
 
 export const MapIconInfo = {

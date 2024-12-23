@@ -9,10 +9,11 @@ import {Location, Offer} from '../../types/offers-types';
 type MapProps = {
   cityLocation: Location;
   offers: Offer[];
+  mapType: string;
   activeOffer?: string | null;
 };
 
-function Map({cityLocation, offers, activeOffer}: MapProps): JSX.Element {
+function Map({cityLocation, offers, mapType, activeOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation);
 
@@ -34,7 +35,7 @@ function Map({cityLocation, offers, activeOffer}: MapProps): JSX.Element {
   return (
     <section
       ref={mapRef}
-      className="cities__map map"
+      className={`${mapType}__map map`}
     >
     </section>
   );

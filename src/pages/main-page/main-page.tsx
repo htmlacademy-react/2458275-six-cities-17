@@ -5,7 +5,7 @@ import {Offer} from '../../types/offers-types';
 import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
-import {CITY_DETAILS} from '../../consts';
+import {CITY_DETAILS, CardType, MapTypes} from '../../consts';
 
 type MainPageProps = {
   offers: Offer[];
@@ -87,10 +87,10 @@ function MainPage({offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={offers} cardType='cities'/>
+              <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={offers} cardType={CardType.Main}/>
             </section>
             <div className="cities__right-section">
-              <Map offers={cityOffers} cityLocation={currentCityDetails.location} activeOffer={activeOfferCard}/>
+              <Map offers={cityOffers} cityLocation={currentCityDetails.location} activeOffer={activeOfferCard} mapType={MapTypes.Main}/>
             </div>
           </div>
         </div>

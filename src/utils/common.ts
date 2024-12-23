@@ -15,5 +15,11 @@ const groupOffersByCity = (offers: Offer[]) => offers.reduce((groupedOffers: Rec
   return groupedOffers;
 }, {});
 
+const getFormattedDate = (date:string) => new Date(date).toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+});
 
-export {capitalize, getRatingStarsCount, groupOffersByCity};
+const getDateWithoutTime = (date:string):string => date.split('T')[0];
+
+export {capitalize, getRatingStarsCount, groupOffersByCity, getFormattedDate, getDateWithoutTime};

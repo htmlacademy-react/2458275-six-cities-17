@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../consts';
+import {AppRoute, CardType} from '../../consts';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/offers-types';
@@ -19,7 +19,7 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritePlacesList offers={offers} cardType='favorites'/>
+            <FavoritePlacesList offers={offers} cardType={CardType.Favourites}/>
           </section>
         </div>
       </main>
