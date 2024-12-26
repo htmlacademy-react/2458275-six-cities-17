@@ -8,22 +8,20 @@ import {AppRoute, AuthorizationStatus} from '../../consts';
 
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {Offer} from '../../types/offers-types';
 import {Review} from '../../types/reviews-types';
 
 type AppProps = {
-  offers: Offer[];
   reviews: Review[];
 }
 
-function App({offers, reviews}: AppProps): JSX.Element {
+function App({reviews}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage offers={offers} />}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Favorites}
@@ -31,7 +29,7 @@ function App({offers, reviews}: AppProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
               >
-                <FavoritesPage offers={offers}/>
+                <FavoritesPage />
               </PrivateRoute>
             }
           />
@@ -41,7 +39,7 @@ function App({offers, reviews}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage offers={offers} reviews={reviews}/>}
+            element={<OfferPage reviews={reviews}/>}
           />
           <Route
             path="*"
