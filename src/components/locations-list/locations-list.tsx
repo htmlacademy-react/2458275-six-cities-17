@@ -1,4 +1,4 @@
-import {CITY_DETAILS} from '../../consts';
+import {CITIES} from '../../consts';
 import {changeCity} from '../../store/action';
 import {useAppDispatch} from '../../hooks/index';
 import {OfferCity} from '../../types/offers-types';
@@ -13,7 +13,7 @@ function LocationsList({currentLocation}: currentLocationProps): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {CITY_DETAILS.map((city) => (
+          {CITIES.map((city) => (
             <li key={city.name} className="locations__item">
               <a
                 className={`locations__item-link tabs__item ${city.name === currentLocation.name ? 'tabs__item--active' : ''}`}
