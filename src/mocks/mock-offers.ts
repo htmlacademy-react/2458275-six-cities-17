@@ -93,4 +93,50 @@ export const MOCK_OFFERS: Offer[] = [
     'isPremium': false,
     'rating': 3.4
   },
+  {
+    'id': '0fcfcd7c-139a-4241-9fa4-7896aed1174f',
+    'title': 'Waterfront with extraordinary view',
+    'type': 'room',
+    'price': 229,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/15.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 48.87561,
+      'longitude': 2.375499,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 1.2
+  },
+  {
+    'id': '1f6b719e-651a-4c64-aae3-5acba7671875',
+    'title': 'Amazing and Extremely Central Flat',
+    'type': 'apartment',
+    'price': 407,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/8.jpg',
+    'city': {
+      'name': 'Cologne',
+      'location': {
+        'latitude': 50.938361,
+        'longitude': 6.959974,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 50.916361,
+      'longitude': 6.944974,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 1.7
+  },
 ];

@@ -49,7 +49,7 @@ export const CITY_DETAILS = [
       zoom: 13
     }
   }
-];
+] as const;
 
 export const Setting = {
   placeCardsCount: 5
