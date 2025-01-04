@@ -2,7 +2,7 @@ import './map.module.css';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
-import useMap from '../../components/hooks/use-map/use-map';
+import useMap from '../../hooks/use-map';
 import {MapIcon} from '../../consts';
 import {Location, Offer} from '../../types/offers-types';
 

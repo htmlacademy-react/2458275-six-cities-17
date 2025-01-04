@@ -2,13 +2,12 @@ import {Link} from 'react-router-dom';
 import {AppRoute, CardType} from '../../consts';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
-import {Offer} from '../../types/offers-types';
 import FavoritePlacesList from '../../components/favorite-places-list/favorite-places-list';
+import {useAppSelector} from '../../hooks/index';
 
-type FavoritesPageProps = {
-  offers: Offer[];
-}
-function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
+
+function FavoritesPage(){
+  const offers = useAppSelector((state) => state.offers);
   return (
     <div className="page">
       <Helmet>

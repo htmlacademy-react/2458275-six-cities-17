@@ -1,6 +1,4 @@
-export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-
-export const CITY_DETAILS = [
+export const CITIES = [
   {
     name: 'Paris',
     location: {
@@ -49,7 +47,7 @@ export const CITY_DETAILS = [
       zoom: 13
     }
   }
-];
+] as const;
 
 export const Setting = {
   placeCardsCount: 5

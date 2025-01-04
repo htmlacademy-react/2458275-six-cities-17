@@ -1,12 +1,21 @@
 import leaflet from 'leaflet';
 import {useEffect, useState, useRef, MutableRefObject } from 'react';
 import {Map} from 'leaflet';
-import {Location} from '../../../types/offers-types';
+import {Location} from '../types/offers-types';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityLocation: Location): Map | null {
 
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
+
+  useEffect(() => {
+    if(map) {
+      map.panTo({
+        lat: cityLocation.latitude,
+        lng: cityLocation.longitude
+      });
+    }
+  }, [cityLocation, map]);
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {

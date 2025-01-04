@@ -1,24 +1,26 @@
 import {useParams} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
-import {Offer} from '../../types/offers-types';
 import {Review} from '../../types/reviews-types';
 import OffersList from '../../components/offers-list/offers-list';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import {CITY_DETAILS, CardType, MapTypes, OfferCardCount} from '../../consts';
+import {CardType, MapTypes, OfferCardCount} from '../../consts';
+import {useAppSelector} from '../../hooks/index';
 
 type OfferPageProps = {
-  offers: Offer[];
   reviews: Review[];
 }
 
-function OfferPage({offers, reviews}: OfferPageProps): JSX.Element {
+function OfferPage({reviews}: OfferPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state.currentCity);
+  const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
+
   const params = useParams();
   const activeOfferId = params.id;
-  const currentCityDetails = CITY_DETAILS[3];
-  const nearPlaces = offers.filter((offer) => offer.id !== activeOfferId).slice(OfferCardCount.Min, OfferCardCount.Max);
+  const nearPlaces = cityOffers.filter((offer) => offer.id !== activeOfferId).slice(OfferCardCount.Min, OfferCardCount.Max);
   const activeOfferDetails = offers.filter((offer) => offer.id === activeOfferId);
   const displayedOffers = [...nearPlaces, ...activeOfferDetails];
 
@@ -164,7 +166,7 @@ function OfferPage({offers, reviews}: OfferPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map offers={displayedOffers} cityLocation={currentCityDetails.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
+          <Map offers={displayedOffers} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
         </section>
         <div className="container">
           <section className="near-places places">
