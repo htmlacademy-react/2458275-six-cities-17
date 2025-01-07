@@ -1,4 +1,5 @@
 import {Offer} from '../types/offers-types';
+import {SortingOption} from '../consts';
 
 const capitalize = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
@@ -22,4 +23,13 @@ const getFormattedDate = (date:string) => new Date(date).toLocaleDateString('en-
 
 const getDateWithoutTime = (date:string):string => date.split('T')[0];
 
-export {capitalize, getRatingStarsCount, groupOffersByCity, getFormattedDate, getDateWithoutTime};
+const sortBy = {
+  [SortingOption.Default]: (offers:Offer[]) => [...offers],
+  [SortingOption.MinPriceFirst]: (offers:Offer[]) => [...offers].sort((firstCard, secondCard) => firstCard.price - secondCard.price),
+  [SortingOption.MaxPriceFirst]: (offers:Offer[]) => [...offers].sort((firstCard, secondCard) => secondCard.price - firstCard.price),
+  [SortingOption.TopRatedFirst]: (offers:Offer[]) => [...offers].sort((firstCard, secondCard) => secondCard.rating - firstCard.rating),
+};
+
+const sortOffers = (offers:Offer[], chosenSortingOption:SortingOption) => sortBy[chosenSortingOption](offers);
+
+export {capitalize, getRatingStarsCount, groupOffersByCity, getFormattedDate, getDateWithoutTime, sortOffers};

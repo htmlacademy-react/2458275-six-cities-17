@@ -77,6 +77,13 @@ export enum CardType {
   Favourites = 'favorites',
 }
 
+export enum SortingOption {
+  Default = 'Popular',
+  MinPriceFirst = 'Price: low to high',
+  MaxPriceFirst = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
 export const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 export const RATINGS = [

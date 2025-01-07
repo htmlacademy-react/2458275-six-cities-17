@@ -1,5 +1,10 @@
-function PlacesSorting():JSX.Element {
+import {SortingOption} from '../../consts';
+import {useAppDispatch, useAppSelector} from '../../hooks/index';
+import {changeSortingOption} from '../../store/action';
 
+function PlacesSorting():JSX.Element {
+  const currentSortingOption = useAppSelector((state) => state.currentSortingOption);
+  const dispatch = useAppDispatch();
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -10,10 +15,17 @@ function PlacesSorting():JSX.Element {
         </svg>
       </span>
       <ul className="places__options places__options--custom places__options--opened">
-        <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-        <li className="places__option" tabIndex={0}>Price: low to high</li>
-        <li className="places__option" tabIndex={0}>Price: high to low</li>
-        <li className="places__option" tabIndex={0}>Top rated first</li>
+        {Object.values(SortingOption).map((sortingOption) =>
+          (<li
+            key={sortingOption}
+            className={`places__option ${sortingOption === currentSortingOption ? 'places__option--active' : ''}`}
+            tabIndex={0}
+            onClick={() => dispatch(changeSortingOption(sortingOption))}
+          >
+            {sortingOption}
+          </li>
+          )
+        )}
       </ul>
     </form>);
 }
