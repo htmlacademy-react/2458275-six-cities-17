@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {store} from './store';
 import App from './components/app/app';
 import {MOCK_REVIEWS} from './mocks/mock-reviews';
@@ -15,6 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
+      <ToastContainer />
       <App
         reviews = {MOCK_REVIEWS}
       />
