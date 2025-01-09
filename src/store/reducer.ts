@@ -1,12 +1,20 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {CITIES, SortingOption} from '../consts';
 import {Offer, OfferCity} from '../types/offers-types';
-import {loadOffers, changeCity, changeSortingOption} from './action';
+import {loadOffers, changeCity, changeSortingOption, setOffersDataLoadingStatus} from './action';
 
-const initialState = {
-  currentCity: CITIES[0] as OfferCity,
-  offers: [] as Offer[],
+type initialState = {
+  currentCity: OfferCity;
+  offers: Offer[];
+  currentSortingOption: SortingOption;
+  isOffersDataLoading: boolean;
+};
+
+const initialState: initialState = {
+  currentCity: CITIES[0],
+  offers: [],
   currentSortingOption: SortingOption.Default,
+  isOffersDataLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -19,6 +27,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeSortingOption, (state, action) => {
       state.currentSortingOption = action.payload;
+    })
+    .addCase(setOffersDataLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
     });
 });
 
