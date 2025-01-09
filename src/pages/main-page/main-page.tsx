@@ -9,12 +9,13 @@ import PlacesSorting from '../../components/places-sorting/places-sorting';
 import MainEmptyPage from './main-empty-page';
 
 import {useAppSelector} from '../../hooks/index';
-
 import {CardType, MapTypes} from '../../consts';
+import {sortOffers} from '../../utils/common';
 
 function MainPage(){
   const offers = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.currentCity);
+  const currentSortingOption = useAppSelector((state) => state.currentSortingOption);
 
   const [activeOfferCard, setActiveOfferCard] = useState<string | null>(null);
   const handleActiveOfferCardChange = (id: string | null) => {
@@ -24,6 +25,7 @@ function MainPage(){
   };
 
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
+  const sortedCityOffers = sortOffers(cityOffers, currentSortingOption);
 
   return (
     <div className="page page--gray page--main">
@@ -35,16 +37,16 @@ function MainPage(){
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList currentLocation={currentCity}/>
         <div className="cities">
-          {(cityOffers.length > 0 ?
+          {(sortedCityOffers.length > 0 ?
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{cityOffers.length} {cityOffers.length === 1 ? 'place' : 'places'} to stay in {currentCity.name}</b>
                 <PlacesSorting />
-                <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={cityOffers} cardType={CardType.Main}/>
+                <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={sortedCityOffers} cardType={CardType.Main}/>
               </section>
               <div className="cities__right-section">
-                <Map offers={cityOffers} cityLocation={currentCity.location} activeOffer={activeOfferCard} mapType={MapTypes.Main}/>
+                <Map offers={sortedCityOffers} cityLocation={currentCity.location} activeOffer={activeOfferCard} mapType={MapTypes.Main}/>
               </div>
             </div> : <MainEmptyPage currentLocation={currentCity}/>)}
         </div>
