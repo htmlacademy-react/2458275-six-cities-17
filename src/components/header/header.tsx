@@ -6,6 +6,9 @@ import {logoutAction} from '../../store/api-actions';
 
 function Header(): JSX.Element {
   const currentAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const currentUserData = useAppSelector((state) => state.userData);
+  const userEmail = currentUserData ? currentUserData.email : '';
+
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -28,7 +31,7 @@ function Header(): JSX.Element {
                   {currentAuthorizationStatus === AuthorizationStatus.Auth ?
                     (
                       <>
-                        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                        <span className="header__user-name user__name">{userEmail}</span>
                         <span className="header__favorite-count">3</span>
                       </>) :
                     <span className="header__login">Sign in</span>}
