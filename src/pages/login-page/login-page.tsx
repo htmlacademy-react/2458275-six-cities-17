@@ -13,14 +13,19 @@ function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleLoginFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
-        login: loginRef.current.value,
+        email: loginRef.current.value,
         password: passwordRef.current.value
-      }));
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            navigate(AppRoute.Main);
+          }
+        });
     }
   };
 
@@ -46,7 +51,7 @@ function LoginPage(): JSX.Element {
               className="login__form form"
               action="#"
               method="post"
-              onSubmit={handleSubmit}
+              onSubmit={handleLoginFormSubmit}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
@@ -67,11 +72,13 @@ function LoginPage(): JSX.Element {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  minLength={2}
+                  pattern='^.*(?=.*[a-zA-Z])(?=.*\d).*$'
+                  title='Пароль должен содержать минимум 1 букву и 1 цифру'
                   required
                 />
               </div>
               <button
-                onClick={() => navigate(AppRoute.Main)}
                 className="login__submit form__submit button"
                 type="submit"
               >

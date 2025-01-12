@@ -7,4 +7,4 @@ export const loadOffers = createAction<Offer[]>('data/loadOffers');
 export const changeSortingOption = createAction<SortingOption>('app/changeSortingOption');
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/setAuthorizationStatus');
