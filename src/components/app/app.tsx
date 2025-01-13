@@ -7,7 +7,7 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 
 import PrivateRoute from '../private-route/private-route';
 
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {AppRoute} from '../../consts';
 
 import {useAppSelector} from '../../hooks/index';
 
@@ -39,9 +39,7 @@ function App({reviews}: AppProps): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.Auth}
-              >
+              <PrivateRoute >
                 <FavoritesPage />
               </PrivateRoute>
             }
