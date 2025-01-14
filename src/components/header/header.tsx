@@ -29,6 +29,19 @@ function Header(): JSX.Element {
     </Link>
   );
 
+  const getProfileSignOutNav = (authorizationStatus: AuthorizationStatus) => (
+    authorizationStatus === AuthorizationStatus.Auth && (
+      <li className="header__nav-item">
+        <Link className="header__nav-link"
+          to="#"
+          onClick={handleLogoutClick}
+        >
+          <span className="header__signout">Sign out</span>
+        </Link>
+      </li>
+    )
+  );
+
   return (
     <header className="header">
       <div className="container">
@@ -41,16 +54,7 @@ function Header(): JSX.Element {
               <li className="header__nav-item user">
                 {getProfileSignInNav(currentAuthorizationStatus)}
               </li>
-              {currentAuthorizationStatus === AuthorizationStatus.Auth && (
-                <li className="header__nav-item">
-                  <Link className="header__nav-link"
-                    to="#"
-                    onClick={handleLogoutClick}
-                  >
-                    <span className="header__signout">Sign out</span>
-                  </Link>
-                </li>
-              )}
+              {getProfileSignOutNav(currentAuthorizationStatus)}
             </ul>
           </nav>
         </div>
