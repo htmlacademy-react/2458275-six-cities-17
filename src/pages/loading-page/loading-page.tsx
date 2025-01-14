@@ -1,6 +1,8 @@
+import styles from './loading-page.module.css';
+
 function LoadingPage(): JSX.Element {
   return (
-    <p>Loading ...</p>
+    <div className={styles.loader}></div>
   );
 }
 
