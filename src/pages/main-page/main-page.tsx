@@ -7,6 +7,7 @@ import Map from '../../components/map/map';
 import LocationsList from '../../components/locations-list/locations-list';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import MainEmptyPage from './main-empty-page';
+import LoadingPage from '../../pages/loading-page/loading-page';
 
 import {useAppSelector} from '../../hooks/index';
 import {CardType, MapTypes} from '../../consts';
@@ -16,16 +17,23 @@ function MainPage(){
   const offers = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.currentCity);
   const currentSortingOption = useAppSelector((state) => state.currentSortingOption);
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+  const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
+  const sortedCityOffers = sortOffers(cityOffers, currentSortingOption);
 
   const [activeOfferCard, setActiveOfferCard] = useState<string | null>(null);
+
   const handleActiveOfferCardChange = (id: string | null) => {
     if (id !== activeOfferCard) {
       setActiveOfferCard(id);
     }
   };
 
-  const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
-  const sortedCityOffers = sortOffers(cityOffers, currentSortingOption);
+  if (isDataLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
 
   return (
     <div className="page page--gray page--main">

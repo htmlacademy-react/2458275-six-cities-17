@@ -88,6 +88,7 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Comments= '/comments',
 }
 
 export const AVATAR_URL = 'https://i.pravatar.cc/128';

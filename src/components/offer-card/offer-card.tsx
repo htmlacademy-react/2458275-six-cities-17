@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offers-types';
-import {capitalize, getRatingStarsCount} from '../../utils/common';
+import {capitalize, getRatingValue} from '../../utils/common';
 import {AppRoute} from '../../consts';
 
 type OfferCardProps = {
@@ -47,7 +47,7 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: getRatingStarsCount(rating)}}></span>
+            <span style={{width: getRatingValue(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

@@ -9,6 +9,12 @@ export type OfferCity = {
     location: Location;
 };
 
+export type OfferHostInfo = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
+
 export type Offer = {
   id: string;
   title: string;
@@ -19,6 +25,17 @@ export type Offer = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  previewImage: string;
+  previewImage?: string;
   };
+
+    type ExtraOfferInfo = {
+    description: string;
+    bedrooms: number;
+    goods: string[];
+    host: OfferHostInfo;
+    images: string[];
+    maxAdults: number;
+}
+
+export type FullOffer = Offer | ExtraOfferInfo;
 

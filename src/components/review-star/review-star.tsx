@@ -1,10 +1,10 @@
-type RatingStarProps = {
+type ReviewStarProps = {
   onChange: React.ChangeEventHandler<HTMLElement>;
   starsCount: number;
   starsCountMeaning: string;
   }
 
-function RatingStar ({onChange, starsCount, starsCountMeaning}: RatingStarProps):
+function ReviewStar ({onChange, starsCount, starsCountMeaning}: ReviewStarProps):
   JSX.Element{
   return(
     <>
@@ -27,4 +27,4 @@ function RatingStar ({onChange, starsCount, starsCountMeaning}: RatingStarProps)
   );
 }
 
-export default RatingStar;
+export default ReviewStar;

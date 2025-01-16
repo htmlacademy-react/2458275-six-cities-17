@@ -1,5 +1,5 @@
 import {ChangeEvent, useState} from 'react';
-import RatingStar from '../rating-star/rating-star';
+import ReviewStar from '../review-star/review-star';
 import {Comment, RATINGS, RATING_INITIAL_VALUE} from '../../consts';
 
 type FormDataType = {
@@ -38,7 +38,7 @@ function ReviewForm():JSX.Element {
                 Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        { RATINGS.map(({value, title}) => <RatingStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} />)}
+        { RATINGS.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} />)}
       </div>
       <textarea
         className="reviews__textarea form__textarea"

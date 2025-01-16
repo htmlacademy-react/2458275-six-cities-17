@@ -3,7 +3,7 @@ import {SortingOption} from '../consts';
 
 const capitalize = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
-const getRatingStarsCount = (rating: number): string => {
+const getRatingValue = (rating: number): string => {
   const ratingProcents = `${Math.round(rating) * 20}%`;
   return ratingProcents;
 };
@@ -32,4 +32,4 @@ const sortBy = {
 
 const sortOffers = (offers:Offer[], chosenSortingOption:SortingOption) => sortBy[chosenSortingOption](offers);
 
-export {capitalize, getRatingStarsCount, groupOffersByCity, getFormattedDate, getDateWithoutTime, sortOffers};
+export {capitalize, getRatingValue, groupOffersByCity, getFormattedDate, getDateWithoutTime, sortOffers};

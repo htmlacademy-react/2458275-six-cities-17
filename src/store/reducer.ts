@@ -1,25 +1,30 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {CITIES, SortingOption, AuthorizationStatus} from '../consts';
-import {Offer, OfferCity} from '../types/offers-types';
+import {Offer, OfferCity, FullOffer} from '../types/offers-types';
 import {UserData} from '../types/user-data';
-import {loadOffers, changeCity, changeSortingOption, setOffersDataLoadingStatus, setAuthorizationStatus, setUserData} from './action';
+import {Review} from '../types/reviews-types';
+import {loadOffers, changeCity, changeSortingOption, setDataLoadingStatus, setAuthorizationStatus, setUserData, loadOfferData, loadComments} from './action';
 
 type initialState = {
   currentCity: OfferCity;
   offers: Offer[];
   currentSortingOption: SortingOption;
-  isOffersDataLoading: boolean;
+  isDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   userData: UserData | null;
+  offerData: FullOffer | null;
+  comments: Review | null;
 };
 
 const initialState: initialState = {
   currentCity: CITIES[0],
   offers: [],
   currentSortingOption: SortingOption.Default,
-  isOffersDataLoading: false,
+  isDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: null,
+  offerData: null,
+  comments: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -33,14 +38,20 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeSortingOption, (state, action) => {
       state.currentSortingOption = action.payload;
     })
-    .addCase(setOffersDataLoadingStatus, (state, action) => {
-      state.isOffersDataLoading = action.payload;
+    .addCase(setDataLoadingStatus, (state, action) => {
+      state.isDataLoading = action.payload;
     })
     .addCase(setAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setUserData, (state, action) => {
       state.userData = action.payload;
+    })
+    .addCase(loadOfferData, (state, action) => {
+      state.offerData = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
     });
 });
 
