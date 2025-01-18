@@ -4,8 +4,8 @@ import {AppDispatch, State} from '../types/state-types';
 import {Offer, FullOffer} from '../types/offers-types';
 import {UserData} from '../types/user-data';
 import {AuthData} from '../types/auth-data';
-import {Review} from '../types/reviews-types';
-import {loadOffers, setDataLoadingStatus, setAuthorizationStatus, setUserData, loadOfferData, loadReviews, loadNearbyPlaces} from './action';
+import {Review, CommentData} from '../types/reviews-types';
+import {loadOffers, setDataLoadingStatus, setAuthorizationStatus, setUserData, loadOfferData, loadReviews, loadNearbyPlaces, setCommentPosting, postNewComment} from './action';
 import {APIRoute, AuthorizationStatus} from '../consts';
 import {saveToken, dropToken} from '../services/token';
 
@@ -81,7 +81,7 @@ export const fetchOfferDataAction = createAsyncThunk<void, string, {
   },
 );
 
-export const fetchOfferReviews = createAsyncThunk<void, string, {
+export const fetchOfferReviewsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -95,7 +95,7 @@ export const fetchOfferReviews = createAsyncThunk<void, string, {
   },
 );
 
-export const fetchNearbyPlaces = createAsyncThunk<void, string, {
+export const fetchNearbyPlacesAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -106,5 +106,19 @@ export const fetchNearbyPlaces = createAsyncThunk<void, string, {
     const {data} = await api.get<Offer[]>(`${APIRoute.Offers}/${id}${APIRoute.NearbyPlaces}`);
     dispatch(setDataLoadingStatus(false));
     dispatch(loadNearbyPlaces(data));
+  },
+);
+
+export const postCommentAction = createAsyncThunk<void, CommentData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/postComment',
+  async ({id, comment}, {dispatch, extra: api}) => {
+    dispatch(setCommentPosting(true));
+    const {data} = await api.post<Review>(`${APIRoute.Comments}/${id}`, {rating: comment.rating, comment: comment.comment});
+    dispatch(postNewComment(data));
+    dispatch(setCommentPosting(false));
   },
 );

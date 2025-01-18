@@ -14,5 +14,7 @@ export const setUserData = createAction<UserData>('user/setUserData');
 export const loadOfferData = createAction<FullOffer>('data/loadOfferData');
 export const loadReviews = createAction<Review[]>('data/loadReviews');
 export const loadNearbyPlaces = createAction<Offer[]>('data/loadNearbyPlaces');
+export const setCommentPosting = createAction<boolean>('app/setFormDisabled');
+export const postNewComment = createAction<Review>('data/postNewComment');
 
 

@@ -3,7 +3,7 @@ import {CITIES, SortingOption, AuthorizationStatus} from '../consts';
 import {Offer, OfferCity, FullOffer} from '../types/offers-types';
 import {UserData} from '../types/user-data';
 import {Review} from '../types/reviews-types';
-import {loadOffers, changeCity, changeSortingOption, setDataLoadingStatus, setAuthorizationStatus, setUserData, loadOfferData, loadReviews, loadNearbyPlaces} from './action';
+import {loadOffers, changeCity, changeSortingOption, setDataLoadingStatus, setAuthorizationStatus, setUserData, loadOfferData, loadReviews, loadNearbyPlaces, setCommentPosting, postNewComment} from './action';
 
 type initialState = {
   currentCity: OfferCity;
@@ -15,6 +15,7 @@ type initialState = {
   offerData: FullOffer | null;
   reviews: Review[];
   nearbyPlaces: Offer[];
+  isCommentPosting: boolean;
 };
 
 const initialState: initialState = {
@@ -27,6 +28,7 @@ const initialState: initialState = {
   offerData: null,
   reviews: [],
   nearbyPlaces: [],
+  isCommentPosting: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -57,6 +59,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadNearbyPlaces, (state, action) => {
       state.nearbyPlaces = action.payload;
+    })
+    .addCase(setCommentPosting, (state, action) => {
+      state.isCommentPosting = action.payload;
+    })
+    .addCase(postNewComment, (state, action) => {
+      state.reviews = [action.payload, ...state.reviews];
     });
 });
 

@@ -2,17 +2,21 @@ type ReviewStarProps = {
   onChange: React.ChangeEventHandler<HTMLElement>;
   starsCount: number;
   starsCountMeaning: string;
+  isDisabled: boolean;
   }
 
-function ReviewStar ({onChange, starsCount, starsCountMeaning}: ReviewStarProps):
+function ReviewStar ({onChange, starsCount, starsCountMeaning, isDisabled}: ReviewStarProps):
   JSX.Element{
   return(
     <>
       <input
         className="form__rating-input visually-hidden"
-        name="rating" value={starsCount}
+        name="rating"
+        value={starsCount}
         id={`${starsCount}-stars`}
-        type="radio" onChange={onChange}
+        type="radio"
+        onChange={onChange}
+        disabled={isDisabled}
       />
       <label
         htmlFor={`${starsCount}-stars`}

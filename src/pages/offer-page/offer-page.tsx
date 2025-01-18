@@ -15,7 +15,7 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import {CardType, MapTypes, AuthorizationStatus} from '../../consts';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import {fetchOfferDataAction, fetchOfferReviews, fetchNearbyPlaces} from '../../store/api-actions';
+import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
 import {capitalize, getMapPoints} from '../../utils/common';
 import {OfferCardCount} from '../../consts';
 
@@ -34,8 +34,8 @@ function OfferPage(): JSX.Element {
   useEffect(() => {
     if (activeOfferId) {
       dispatch(fetchOfferDataAction(activeOfferId));
-      dispatch(fetchOfferReviews(activeOfferId));
-      dispatch(fetchNearbyPlaces(activeOfferId));
+      dispatch(fetchOfferReviewsAction(activeOfferId));
+      dispatch(fetchNearbyPlacesAction(activeOfferId));
     }
   }, [activeOfferId, dispatch]);
 

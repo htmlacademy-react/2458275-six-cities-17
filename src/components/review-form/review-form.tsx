@@ -1,32 +1,48 @@
 import {ChangeEvent, useState} from 'react';
 import ReviewStar from '../review-star/review-star';
 import {Comment, RATINGS, RATING_INITIAL_VALUE} from '../../consts';
+import {useAppSelector, useAppDispatch} from '../../hooks/index';
+import {postCommentAction} from '../../store/api-actions';
+import {CommentForm} from '../../types/reviews-types';
 
-type FormDataType = {
-  rating: number;
-  comment: string;
-};
-const initialState: FormDataType = {
+const initialState: CommentForm = {
   rating: RATING_INITIAL_VALUE,
   comment: Comment.InitialState,
 };
 
 function ReviewForm():JSX.Element {
 
-  const [formData, setFormData] = useState<FormDataType>(initialState);
+  const [formData, setFormData] = useState<CommentForm>(initialState);
+  const reviewedOffer = useAppSelector((state) => state.offerData);
+  const isCommentPosting = useAppSelector((state) => state.isCommentPosting);
+  const dispatch = useAppDispatch();
+
   const isSubmitButtonDisabled = formData.rating === RATING_INITIAL_VALUE
   || formData.comment.length < Comment.MinLength
-  || formData.comment.length > Comment.MaxLength;
-
-  const handleFormSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormData(initialState);
-  };
+  || formData.comment.length > Comment.MaxLength
+  || isCommentPosting === true;
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
     const {value} = e.target;
     setFormData(e.target.name === 'review' ? {...formData, comment: value} : {...formData, rating: Number(value)});
   };
+
+  const handleFormSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (reviewedOffer) {
+      dispatch(postCommentAction({
+        id: reviewedOffer.id,
+        comment: formData
+      }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'fulfilled') {
+            setFormData(initialState);
+          }
+        });
+    }
+  };
+
   return (
     <form
       className="reviews__form form"
@@ -38,7 +54,7 @@ function ReviewForm():JSX.Element {
                 Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        { RATINGS.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} />)}
+        {RATINGS.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} isDisabled={isCommentPosting}/>)}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
@@ -46,6 +62,7 @@ function ReviewForm():JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleValueChange}
+        disabled={isCommentPosting}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -59,7 +76,7 @@ function ReviewForm():JSX.Element {
           type="submit"
           disabled={isSubmitButtonDisabled}
         >
-                  Submit
+          {isCommentPosting ? 'Submitting' : 'Submit'}
         </button>
       </div>
     </form>
