@@ -12,7 +12,7 @@ export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingSt
 export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/setAuthorizationStatus');
 export const setUserData = createAction<UserData>('user/setUserData');
 export const loadOfferData = createAction<FullOffer>('data/loadOfferData');
-export const loadReviews = createAction<Review>('data/loadReviews');
+export const loadReviews = createAction<Review[]>('data/loadReviews');
 export const loadNearbyPlaces = createAction<Offer[]>('data/loadNearbyPlaces');
 
 
