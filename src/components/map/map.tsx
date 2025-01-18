@@ -17,7 +17,7 @@ function Map({cityLocation, mapPoints, mapType, activeOffer}: MapProps): JSX.Ele
   const mapRef = useRef(null);
   const shouldZoomScroll = mapType === MapTypes.Main;
   const map = useMap(mapRef, cityLocation, shouldZoomScroll);
-  console.log()
+
   useEffect(() => {
     if (map) {
       const markers:Marker[] = [];

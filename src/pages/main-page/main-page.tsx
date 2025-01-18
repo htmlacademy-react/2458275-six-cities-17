@@ -21,7 +21,7 @@ function MainPage(){
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
   const sortedCityOffers = sortOffers(cityOffers, currentSortingOption);
 
-  const mapPoints = getMapPoints(offers);
+  const mapPoints = getMapPoints(cityOffers);
 
   const [activeOfferCard, setActiveOfferCard] = useState<string | null>(null);
 

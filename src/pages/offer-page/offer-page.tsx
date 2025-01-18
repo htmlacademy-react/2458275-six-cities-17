@@ -30,7 +30,7 @@ function OfferPage(): JSX.Element {
   const params = useParams();
   const activeOfferId = params.id;
   const dispatch = useAppDispatch();
-  console.log(currentOfferData);
+
   useEffect(() => {
     if (activeOfferId) {
       dispatch(fetchOfferDataAction(activeOfferId));
