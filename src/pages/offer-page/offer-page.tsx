@@ -16,7 +16,7 @@ import {CardType, MapTypes, AuthorizationStatus} from '../../consts';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviews, fetchNearbyPlaces} from '../../store/api-actions';
-import {capitalize} from '../../utils/common';
+import {capitalize, getMapPoints} from '../../utils/common';
 import {OfferCardCount} from '../../consts';
 
 function OfferPage(): JSX.Element {
@@ -30,7 +30,7 @@ function OfferPage(): JSX.Element {
   const params = useParams();
   const activeOfferId = params.id;
   const dispatch = useAppDispatch();
-  console.log(reviews);
+  console.log(currentOfferData);
   useEffect(() => {
     if (activeOfferId) {
       dispatch(fetchOfferDataAction(activeOfferId));
@@ -49,6 +49,7 @@ function OfferPage(): JSX.Element {
     return <NotFoundPage />;
   }
   const { isPremium, description, rating, type, bedrooms, maxAdults, price, title, isFavorite, goods, host, images } = currentOfferData;
+  const mapPoints = getMapPoints(nearbyPlaces, currentOfferData);
 
   return (
     <div className="page">
@@ -102,7 +103,7 @@ function OfferPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map offers={nearbyPlaces} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
+          <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
         </section>
         <div className="container">
           <section className="near-places places">

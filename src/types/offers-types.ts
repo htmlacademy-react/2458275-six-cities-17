@@ -36,3 +36,5 @@ export type FullOffer = Omit<Offer, 'previewImage'> & {
   images: string[];
   maxAdults: number;
 };
+
+export type offerMapPoint = Pick<Offer, 'id' | 'location'>;

@@ -11,7 +11,7 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 
 import {useAppSelector} from '../../hooks/index';
 import {CardType, MapTypes} from '../../consts';
-import {sortOffers} from '../../utils/common';
+import {sortOffers, getMapPoints} from '../../utils/common';
 
 function MainPage(){
   const offers = useAppSelector((state) => state.offers);
@@ -20,6 +20,8 @@ function MainPage(){
   const isDataLoading = useAppSelector((state) => state.isDataLoading);
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
   const sortedCityOffers = sortOffers(cityOffers, currentSortingOption);
+
+  const mapPoints = getMapPoints(offers);
 
   const [activeOfferCard, setActiveOfferCard] = useState<string | null>(null);
 
@@ -54,7 +56,7 @@ function MainPage(){
                 <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={sortedCityOffers} cardType={CardType.Main}/>
               </section>
               <div className="cities__right-section">
-                <Map offers={sortedCityOffers} cityLocation={currentCity.location} activeOffer={activeOfferCard} mapType={MapTypes.Main}/>
+                <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferCard} mapType={MapTypes.Main}/>
               </div>
             </div> : <MainEmptyPage currentLocation={currentCity}/>)}
         </div>

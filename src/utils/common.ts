@@ -1,4 +1,4 @@
-import {Offer} from '../types/offers-types';
+import {Offer, FullOffer} from '../types/offers-types';
 import {Review} from '../types/reviews-types';
 import {SortingOption} from '../consts';
 
@@ -24,6 +24,17 @@ const getFormattedDate = (date:string) => new Date(date).toLocaleDateString('en-
 
 const getDateWithoutTime = (date:string):string => date.split('T')[0];
 
+const getMapPoints = (offers: Offer[], fullOffer?: FullOffer) => {
+  const mapPoints = offers.map(({id, location}) => ({id, location}));
+  if(fullOffer) {
+    return mapPoints .concat({
+      id: fullOffer.id,
+      location: fullOffer.location,
+    });
+  }
+  return mapPoints;
+};
+
 const sortBy = {
   [SortingOption.Default]: (offers:Offer[]) => [...offers],
   [SortingOption.MinPriceFirst]: (offers:Offer[]) => [...offers].sort((firstCard, secondCard) => firstCard.price - secondCard.price),
@@ -35,4 +46,4 @@ const sortOffers = (offers:Offer[], chosenSortingOption:SortingOption) => sortBy
 
 const sortReviews = (reviews: Review[]) => reviews.toSorted((reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date));
 
-export {capitalize, getRatingValue, groupOffersByCity, getFormattedDate, getDateWithoutTime, sortOffers, sortReviews};
+export {capitalize, getRatingValue, groupOffersByCity, getFormattedDate, getDateWithoutTime, getMapPoints, sortOffers, sortReviews};
