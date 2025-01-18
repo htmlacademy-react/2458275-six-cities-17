@@ -1,4 +1,5 @@
 import {Offer} from '../types/offers-types';
+import {Review} from '../types/reviews-types';
 import {SortingOption} from '../consts';
 
 const capitalize = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
@@ -32,4 +33,6 @@ const sortBy = {
 
 const sortOffers = (offers:Offer[], chosenSortingOption:SortingOption) => sortBy[chosenSortingOption](offers);
 
-export {capitalize, getRatingValue, groupOffersByCity, getFormattedDate, getDateWithoutTime, sortOffers};
+const sortReviews = (reviews: Review[]) => reviews.toSorted((reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date));
+
+export {capitalize, getRatingValue, groupOffersByCity, getFormattedDate, getDateWithoutTime, sortOffers, sortReviews};

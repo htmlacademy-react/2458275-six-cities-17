@@ -25,17 +25,14 @@ export type Offer = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  previewImage?: string;
+  previewImage: string;
   };
 
-    type ExtraOfferInfo = {
-    description: string;
-    bedrooms: number;
-    goods: string[];
-    host: OfferHostInfo;
-    images: string[];
-    maxAdults: number;
-}
-
-export type FullOffer = Offer | ExtraOfferInfo;
-
+export type FullOffer = Omit<Offer, 'previewImage'> & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: OfferHostInfo;
+  images: string[];
+  maxAdults: number;
+};

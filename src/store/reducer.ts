@@ -3,7 +3,7 @@ import {CITIES, SortingOption, AuthorizationStatus} from '../consts';
 import {Offer, OfferCity, FullOffer} from '../types/offers-types';
 import {UserData} from '../types/user-data';
 import {Review} from '../types/reviews-types';
-import {loadOffers, changeCity, changeSortingOption, setDataLoadingStatus, setAuthorizationStatus, setUserData, loadOfferData, loadComments} from './action';
+import {loadOffers, changeCity, changeSortingOption, setDataLoadingStatus, setAuthorizationStatus, setUserData, loadOfferData, loadReviews, loadNearbyPlaces} from './action';
 
 type initialState = {
   currentCity: OfferCity;
@@ -13,7 +13,8 @@ type initialState = {
   authorizationStatus: AuthorizationStatus;
   userData: UserData | null;
   offerData: FullOffer | null;
-  comments: Review | null;
+  reviews: Review[];
+  nearbyPlaces: Offer[];
 };
 
 const initialState: initialState = {
@@ -24,7 +25,8 @@ const initialState: initialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: null,
   offerData: null,
-  comments: null,
+  reviews: [],
+  nearbyPlaces: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -50,8 +52,11 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOfferData, (state, action) => {
       state.offerData = action.payload;
     })
-    .addCase(loadComments, (state, action) => {
-      state.comments = action.payload;
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(loadNearbyPlaces, (state, action) => {
+      state.nearbyPlaces = action.payload;
     });
 });
 

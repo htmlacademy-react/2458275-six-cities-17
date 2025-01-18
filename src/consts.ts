@@ -89,9 +89,8 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Comments= '/comments',
+  NearbyPlaces='/nearby',
 }
-
-export const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 export const RATINGS = [
   {
@@ -118,6 +117,8 @@ export const RATINGS = [
 export const Comment = {
   MinLength: 50,
   MaxLength: 300,
+  MinAmount: 0,
+  MaxAmount: 10,
   InitialState: ' ',
 };
 

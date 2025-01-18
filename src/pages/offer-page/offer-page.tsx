@@ -2,7 +2,6 @@ import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
-import {Review} from '../../types/reviews-types';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import Rating from '../../components/rating/rating';
@@ -13,49 +12,42 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
 import Map from '../../components/map/map';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {CardType, MapTypes, OfferCardCount} from '../../consts';
+import {CardType, MapTypes, AuthorizationStatus} from '../../consts';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import {fetchOfferDataAction} from '../../store/api-actions';
+import {fetchOfferDataAction, fetchOfferReviews, fetchNearbyPlaces} from '../../store/api-actions';
 import {capitalize} from '../../utils/common';
+import {OfferCardCount} from '../../consts';
 
-type OfferPageProps = {
-  reviews: Review[];
-}
-
-function OfferPage({reviews}: OfferPageProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+function OfferPage(): JSX.Element {
   const currentCity = useAppSelector((state) => state.currentCity);
+  const currentAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isDataLoading = useAppSelector((state) => state.isDataLoading);
-  /*const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name); */
+  const currentOfferData = useAppSelector((state) => state.offerData);
+  const reviews = useAppSelector((state) => state.reviews);
+  const nearbyPlaces = useAppSelector((state) => state.nearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
 
   const params = useParams();
   const activeOfferId = params.id;
   const dispatch = useAppDispatch();
-
-  /*const nearPlaces = cityOffers.filter((offer) => offer.id !== activeOfferId).slice(OfferCardCount.Min, OfferCardCount.Max);
-  const activeOfferDetails = offers.filter((offer) => offer.id === activeOfferId);
-  const displayedOffers = [...nearPlaces, ...activeOfferDetails]; */
-
+  console.log(reviews);
   useEffect(() => {
     if (activeOfferId) {
       dispatch(fetchOfferDataAction(activeOfferId));
+      dispatch(fetchOfferReviews(activeOfferId));
+      dispatch(fetchNearbyPlaces(activeOfferId));
     }
   }, [activeOfferId, dispatch]);
-
-  const currentOfferData = useAppSelector((state) => state.offerData);
-  const comments = useAppSelector((state) => state.comments);
-  console.log(currentOfferData);
 
   if (isDataLoading) {
     return (
       <LoadingPage />
     );
   }
-  if (!currentOfferData && !isDataLoading) {
+
+  if (!currentOfferData) {
     return <NotFoundPage />;
   }
-
   const { isPremium, description, rating, type, bedrooms, maxAdults, price, title, isFavorite, goods, host, images } = currentOfferData;
 
   return (
@@ -101,24 +93,27 @@ function OfferPage({reviews}: OfferPageProps): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">
+                {reviews.length > 0 ? (
+                  <h2 className="reviews__title">
               Reviews · <span className="reviews__amount">{reviews.length}</span>
-                </h2>
+                  </h2>) : ''}
                 <ReviewsList reviews={reviews} />
-                <ReviewForm />
+                {currentAuthorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
               </section>
             </div>
           </div>
-          <Map offers={offers} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
+          <Map offers={nearbyPlaces} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">
           Other places in the neighbourhood
             </h2>
-            <div className="near-places__list places__list">
-              <OffersList offers={offers} cardType={CardType.Offer}/>
-            </div>
+            {nearbyPlaces && (
+              <div className="near-places__list places__list">
+                <OffersList offers={nearbyPlaces} cardType={CardType.Offer}/>
+              </div>
+            )}
           </section>
         </div>
       </main>
