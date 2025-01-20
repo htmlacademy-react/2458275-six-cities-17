@@ -3,9 +3,10 @@ type ReviewStarProps = {
   starsCount: number;
   starsCountMeaning: string;
   isDisabled: boolean;
+  isChecked: boolean;
   }
 
-function ReviewStar ({onChange, starsCount, starsCountMeaning, isDisabled}: ReviewStarProps):
+function ReviewStar ({onChange, starsCount, starsCountMeaning, isDisabled, isChecked }: ReviewStarProps):
   JSX.Element{
   return(
     <>
@@ -17,6 +18,7 @@ function ReviewStar ({onChange, starsCount, starsCountMeaning, isDisabled}: Revi
         type="radio"
         onChange={onChange}
         disabled={isDisabled}
+        checked={isChecked}
       />
       <label
         htmlFor={`${starsCount}-stars`}

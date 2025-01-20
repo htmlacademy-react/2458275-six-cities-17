@@ -41,6 +41,7 @@ function ReviewForm():JSX.Element {
           }
         });
     }
+
   };
 
   return (
@@ -54,12 +55,13 @@ function ReviewForm():JSX.Element {
                 Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {RATINGS.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} isDisabled={isCommentPosting}/>)}
+        {RATINGS.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} isChecked={formData.rating === value} isDisabled={isCommentPosting}/>)}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
+        value={formData.comment}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleValueChange}
         disabled={isCommentPosting}
