@@ -1,11 +1,12 @@
 import {SortingOption} from '../../consts';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import {changeSortingOption} from '../../store/action';
+import {changeSortingOption} from '../../store/app-process-slice/app-process-slice';
 import {useState, useEffect, useRef} from 'react';
+import {getCurrentSortingOption} from '../../store/app-process-slice/selectors';
 
 function PlacesSorting():JSX.Element {
   const dispatch = useAppDispatch();
-  const currentSortingOption = useAppSelector((state) => state.currentSortingOption);
+  const currentSortingOption = useAppSelector(getCurrentSortingOption);
 
   const sortingRef = useRef<HTMLElement>(null);
   const [isSortingListOpened, setSortingListOpened] = useState(false);

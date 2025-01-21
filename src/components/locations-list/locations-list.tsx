@@ -1,5 +1,5 @@
 import {CITIES} from '../../consts';
-import {changeCity} from '../../store/action';
+import {changeCity} from '../../store/app-process-slice/app-process-slice';
 import {useAppDispatch} from '../../hooks/index';
 import {OfferCity} from '../../types/offers-types';
 

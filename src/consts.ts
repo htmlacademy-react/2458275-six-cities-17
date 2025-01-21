@@ -49,10 +49,6 @@ export const CITIES = [
   }
 ] as const;
 
-export const Setting = {
-  placeCardsCount: 5
-};
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -90,6 +86,21 @@ export enum APIRoute {
   Logout = '/logout',
   Comments= '/comments',
   NearbyPlaces='/nearby',
+}
+
+export enum NameSpace {
+  App = 'App',
+  Offers = 'Offers',
+  FullOffer = 'FullOffer',
+  User = 'User',
+  Review = 'Review',
+}
+
+export enum Status {
+  Idle = 'Idle',
+  Loading= 'Loading',
+  Success = 'Success',
+  Error = 'Error',
 }
 
 export const RATINGS = [

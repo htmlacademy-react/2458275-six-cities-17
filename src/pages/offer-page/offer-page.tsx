@@ -18,14 +18,18 @@ import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
 import {capitalize, getMapPoints} from '../../utils/common';
 import {OfferCardCount} from '../../consts';
+import {getCurrentCity} from '../../store/app-process-slice/selectors';
+import {getAuthorizationStatus} from '../../store/user-process-slice/selectors';
+import {getFullOfferLoadingStatus, getFullOfferData, getNearbyPlaces} from '../../store/full-offer-process-slice/selectors';
+import {getReviews} from '../../store/review-process-slice/selectors';
 
 function OfferPage(): JSX.Element {
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const currentAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isDataLoading = useAppSelector((state) => state.isDataLoading);
-  const currentOfferData = useAppSelector((state) => state.offerData);
-  const reviews = useAppSelector((state) => state.reviews);
-  const nearbyPlaces = useAppSelector((state) => state.nearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
+  const currentCity = useAppSelector(getCurrentCity);
+  const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isFullOfferDataLoading = useAppSelector(getFullOfferLoadingStatus);
+  const currentOfferData = useAppSelector(getFullOfferData);
+  const reviews = useAppSelector(getReviews);
+  const nearbyPlaces = useAppSelector(getNearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
 
   const params = useParams();
   const activeOfferId = params.id;
@@ -39,7 +43,7 @@ function OfferPage(): JSX.Element {
     }
   }, [activeOfferId, dispatch]);
 
-  if (isDataLoading) {
+  if (isFullOfferDataLoading) {
     return (
       <LoadingPage />
     );

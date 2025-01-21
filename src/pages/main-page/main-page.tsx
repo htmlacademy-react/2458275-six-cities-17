@@ -12,12 +12,15 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppSelector} from '../../hooks/index';
 import {CardType, MapTypes} from '../../consts';
 import {sortOffers, getMapPoints} from '../../utils/common';
+import {getOffersData, getOffersLoadingStatus} from '../../store/offers-process-slice/selectors';
+import {getCurrentCity, getCurrentSortingOption} from '../../store/app-process-slice/selectors';
 
 function MainPage(){
-  const offers = useAppSelector((state) => state.offers);
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const currentSortingOption = useAppSelector((state) => state.currentSortingOption);
-  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+  const offers = useAppSelector(getOffersData);
+  const currentCity = useAppSelector(getCurrentCity);
+  const currentSortingOption = useAppSelector(getCurrentSortingOption);
+  const isDataLoading = useAppSelector(getOffersLoadingStatus);
+
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
   const sortedCityOffers = sortOffers(cityOffers, currentSortingOption);
 
