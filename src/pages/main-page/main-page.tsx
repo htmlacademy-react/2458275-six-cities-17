@@ -1,38 +1,20 @@
 import {Helmet} from 'react-helmet-async';
-import {useState} from 'react';
-
 import Header from '../../components/header/header';
-import OffersList from '../../components/offers-list/offers-list';
-import Map from '../../components/map/map';
 import LocationsList from '../../components/locations-list/locations-list';
-import PlacesSorting from '../../components/places-sorting/places-sorting';
-import MainEmptyPage from './main-empty-page';
+import PacesEmptyContainer from '../../components/places-container/places-empty-container';
 import LoadingPage from '../../pages/loading-page/loading-page';
+import PlacesContainer from '../../components/places-container/places-container';
 
 import {useAppSelector} from '../../hooks/index';
-import {CardType, MapTypes} from '../../consts';
-import {sortOffers, getMapPoints} from '../../utils/common';
 import {getOffersData, getOffersLoadingStatus} from '../../store/offers-process-slice/selectors';
-import {getCurrentCity, getCurrentSortingOption} from '../../store/app-process-slice/selectors';
+import {getCurrentCity} from '../../store/app-process-slice/selectors';
 
 function MainPage(){
   const offers = useAppSelector(getOffersData);
   const currentCity = useAppSelector(getCurrentCity);
-  const currentSortingOption = useAppSelector(getCurrentSortingOption);
   const isDataLoading = useAppSelector(getOffersLoadingStatus);
 
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
-  const sortedCityOffers = sortOffers(cityOffers, currentSortingOption);
-
-  const mapPoints = getMapPoints(cityOffers);
-
-  const [activeOfferCard, setActiveOfferCard] = useState<string | null>(null);
-
-  const handleActiveOfferCardChange = (id: string | null) => {
-    if (id !== activeOfferCard) {
-      setActiveOfferCard(id);
-    }
-  };
 
   if (isDataLoading) {
     return (
@@ -50,18 +32,8 @@ function MainPage(){
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList currentLocation={currentCity}/>
         <div className="cities">
-          {(sortedCityOffers.length > 0 ?
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{cityOffers.length} {cityOffers.length === 1 ? 'place' : 'places'} to stay in {currentCity.name}</b>
-                <PlacesSorting />
-                <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={sortedCityOffers} cardType={CardType.Main}/>
-              </section>
-              <div className="cities__right-section">
-                <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferCard} mapType={MapTypes.Main}/>
-              </div>
-            </div> : <MainEmptyPage currentLocation={currentCity}/>)}
+          {cityOffers.length > 0 ?
+            <PlacesContainer currentLocation={currentCity} offers={cityOffers}/> : <PacesEmptyContainer currentLocation={currentCity}/> }
         </div>
       </main>
     </div>

@@ -4,7 +4,7 @@ type currentLocationProps = {
   currentLocation: OfferCity;
 }
 
-function MainEmptyPage({currentLocation}: currentLocationProps): JSX.Element {
+function PacesEmptyContainer({currentLocation}: currentLocationProps): JSX.Element {
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">
@@ -20,4 +20,4 @@ function MainEmptyPage({currentLocation}: currentLocationProps): JSX.Element {
   );
 }
 
-export default MainEmptyPage;
+export default PacesEmptyContainer;
