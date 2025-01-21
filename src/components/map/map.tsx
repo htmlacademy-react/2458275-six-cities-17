@@ -3,31 +3,32 @@ import leaflet, {Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
 import useMap from '../../hooks/use-map';
-import {MapIcon} from '../../consts';
-import {Location, Offer} from '../../types/offers-types';
+import {MapIcon, MapTypes} from '../../consts';
+import {Location, offerMapPoint} from '../../types/offers-types';
 
 type MapProps = {
   cityLocation: Location;
-  offers: Offer[];
-  mapType: string;
+  mapType: MapTypes;
   activeOffer?: string | null;
+  mapPoints: offerMapPoint[];
 };
 
-function Map({cityLocation, offers, mapType, activeOffer}: MapProps): JSX.Element {
+function Map({cityLocation, mapPoints, mapType, activeOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cityLocation);
+  const shouldZoomScroll = mapType === MapTypes.Main;
+  const map = useMap(mapRef, cityLocation, shouldZoomScroll);
 
   useEffect(() => {
     if (map) {
       const markers:Marker[] = [];
-      offers.forEach((offer) => {
+      mapPoints.forEach((point) => {
         const marker =
         leaflet
           .marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
+            lat: point.location.latitude,
+            lng: point.location.longitude,
           }, {
-            icon: offer.id === activeOffer ? leaflet.icon(MapIcon.Active) : leaflet.icon(MapIcon.Default),
+            icon: point.id === activeOffer ? leaflet.icon(MapIcon.Active) : leaflet.icon(MapIcon.Default),
           })
           .addTo(map);
         markers.push(marker);
@@ -38,7 +39,7 @@ function Map({cityLocation, offers, mapType, activeOffer}: MapProps): JSX.Elemen
         });
       };
     }
-  }, [map, offers, activeOffer]);
+  }, [map, mapPoints, activeOffer, cityLocation]);
 
   return (
     <section

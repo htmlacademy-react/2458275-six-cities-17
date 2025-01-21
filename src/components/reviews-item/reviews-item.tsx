@@ -1,5 +1,6 @@
 import {Review} from '../../types/reviews-types';
-import {getRatingStarsCount, getFormattedDate, getDateWithoutTime} from '../../utils/common';
+import {getFormattedDate, getDateWithoutTime} from '../../utils/common';
+import Rating from '../../components/rating/rating';
 
 type ReviewsItemProps = {
   review: Review;
@@ -21,12 +22,7 @@ function ReviewsItem({review}: ReviewsItemProps): JSX.Element {
         <span className="reviews__user-name">{user.name}</span>
       </div>
       <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{width: getRatingStarsCount(rating)}} />
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating ratingType={'reviewRating'} ratingValue={rating}/>
         <p className="reviews__text">
           {comment}
         </p>

@@ -9,6 +9,12 @@ export type OfferCity = {
     location: Location;
 };
 
+export type OfferHostInfo = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
+
 export type Offer = {
   id: string;
   title: string;
@@ -22,3 +28,13 @@ export type Offer = {
   previewImage: string;
   };
 
+export type FullOffer = Omit<Offer, 'previewImage'> & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: OfferHostInfo;
+  images: string[];
+  maxAdults: number;
+};
+
+export type offerMapPoint = Pick<Offer, 'id' | 'location'>;

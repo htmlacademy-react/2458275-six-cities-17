@@ -1,9 +1,10 @@
-import {Offer} from '../types/offers-types';
+import {Offer, FullOffer} from '../types/offers-types';
+import {Review} from '../types/reviews-types';
 import {SortingOption} from '../consts';
 
 const capitalize = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
-const getRatingStarsCount = (rating: number): string => {
+const getRatingValue = (rating: number): string => {
   const ratingProcents = `${Math.round(rating) * 20}%`;
   return ratingProcents;
 };
@@ -23,6 +24,17 @@ const getFormattedDate = (date:string) => new Date(date).toLocaleDateString('en-
 
 const getDateWithoutTime = (date:string):string => date.split('T')[0];
 
+const getMapPoints = (offers: Offer[], fullOffer?: FullOffer) => {
+  const mapPoints = offers.map(({id, location}) => ({id, location}));
+  if(fullOffer) {
+    return mapPoints .concat({
+      id: fullOffer.id,
+      location: fullOffer.location,
+    });
+  }
+  return mapPoints;
+};
+
 const sortBy = {
   [SortingOption.Default]: (offers:Offer[]) => [...offers],
   [SortingOption.MinPriceFirst]: (offers:Offer[]) => [...offers].sort((firstCard, secondCard) => firstCard.price - secondCard.price),
@@ -32,4 +44,6 @@ const sortBy = {
 
 const sortOffers = (offers:Offer[], chosenSortingOption:SortingOption) => sortBy[chosenSortingOption](offers);
 
-export {capitalize, getRatingStarsCount, groupOffersByCity, getFormattedDate, getDateWithoutTime, sortOffers};
+const sortReviews = (reviews: Review[]) => reviews.toSorted((reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date));
+
+export {capitalize, getRatingValue, groupOffersByCity, getFormattedDate, getDateWithoutTime, getMapPoints, sortOffers, sortReviews};

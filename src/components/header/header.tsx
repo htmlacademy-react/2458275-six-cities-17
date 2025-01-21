@@ -7,7 +7,7 @@ import {logoutAction} from '../../store/api-actions';
 function Header(): JSX.Element {
   const currentAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const currentUserData = useAppSelector((state) => state.userData);
-  const userEmail = currentUserData ? currentUserData.email : '';
+  const userEmail = currentUserData && currentUserData.email;
 
   const dispatch = useAppDispatch();
 
@@ -15,6 +15,32 @@ function Header(): JSX.Element {
     e.preventDefault();
     dispatch(logoutAction());
   };
+
+  const getProfileSignInNav = (authorizationStatus: AuthorizationStatus) => (
+    <Link className="header__nav-link header__nav-link--profile" to={authorizationStatus === AuthorizationStatus.Auth ? AppRoute.Favorites : AppRoute.Login}>
+      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+      {authorizationStatus === AuthorizationStatus.Auth ?
+        (
+          <>
+            <span className="header__user-name user__name">{userEmail}</span>
+            <span className="header__favorite-count">3</span>
+          </>) :
+        <span className="header__login">Sign in</span>}
+    </Link>
+  );
+
+  const getProfileSignOutNav = (authorizationStatus: AuthorizationStatus) => (
+    authorizationStatus === AuthorizationStatus.Auth && (
+      <li className="header__nav-item">
+        <Link className="header__nav-link"
+          to="#"
+          onClick={handleLogoutClick}
+        >
+          <span className="header__signout">Sign out</span>
+        </Link>
+      </li>
+    )
+  );
 
   return (
     <header className="header">
@@ -26,27 +52,9 @@ function Header(): JSX.Element {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={currentAuthorizationStatus === AuthorizationStatus.Auth ? AppRoute.Favorites : AppRoute.Login}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  {currentAuthorizationStatus === AuthorizationStatus.Auth ?
-                    (
-                      <>
-                        <span className="header__user-name user__name">{userEmail}</span>
-                        <span className="header__favorite-count">3</span>
-                      </>) :
-                    <span className="header__login">Sign in</span>}
-                </Link>
+                {getProfileSignInNav(currentAuthorizationStatus)}
               </li>
-              {currentAuthorizationStatus === AuthorizationStatus.Auth ? (
-                <li className="header__nav-item">
-                  <Link className="header__nav-link"
-                    to="#"
-                    onClick={handleLogoutClick}
-                  >
-                    <span className="header__signout">Sign out</span>
-                  </Link>
-                </li>
-              ) : ''}
+              {getProfileSignOutNav(currentAuthorizationStatus)}
             </ul>
           </nav>
         </div>
