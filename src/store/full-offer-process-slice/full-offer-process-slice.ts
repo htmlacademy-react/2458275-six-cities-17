@@ -29,10 +29,8 @@ export const fullOfferProcessSlice = createSlice({
       })
       .addCase(fetchNearbyPlacesAction.fulfilled, (state, action) => {
         state.nearbyPlaces = action.payload;
-        state.isNearbyPlacesLoading = false;
       })
-      .addCase(fetchNearbyPlacesAction.rejected, (state) => {
-        state.isNearbyPlacesLoading = false;
+      .addCase(fetchNearbyPlacesAction.rejected, () => {
         toast.warn('Something went wrong while loading the nearby places. If you want to see the nearby places, try reloading the page');
       });
   }
