@@ -25,11 +25,9 @@ export type FullOfferProcess = {
   fullOfferData: FullOffer | null;
   nearbyPlaces: Offer[];
   isFullOfferDataLoading: boolean;
-  isNearbyPlacesLoading: boolean;
 }
 
 export type ReviewProcess = {
   reviews: Review[];
-  isReviewsDataLoading: boolean;
   newReviewPostingStatus: Status;
 }

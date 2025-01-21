@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../consts';
 import {OffersProcess} from '../../types/state-types';
 import {fetchOffersAction} from '../api-actions';
+import {toast} from 'react-toastify';
 
 const initialState: OffersProcess = {
   offers: [],
@@ -20,6 +21,10 @@ export const offersProcessSlice = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersDataLoading = false;
+      })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.isOffersDataLoading = false;
+        toast.warn('Something went wrong while loading offers. Please try again');
       });
   }
 });

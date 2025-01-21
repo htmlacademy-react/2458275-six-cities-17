@@ -12,12 +12,11 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
 import Map from '../../components/map/map';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {CardType, MapTypes, AuthorizationStatus} from '../../consts';
+import {CardType, MapTypes, AuthorizationStatus, OfferCardCount} from '../../consts';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
 import {capitalize, getMapPoints} from '../../utils/common';
-import {OfferCardCount} from '../../consts';
 import {getCurrentCity} from '../../store/app-process-slice/selectors';
 import {getAuthorizationStatus} from '../../store/user-process-slice/selectors';
 import {getFullOfferLoadingStatus, getFullOfferData, getNearbyPlaces} from '../../store/full-offer-process-slice/selectors';
@@ -26,7 +25,7 @@ import {getReviews} from '../../store/review-process-slice/selectors';
 function OfferPage(): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
   const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isFullOfferDataLoading = useAppSelector(getFullOfferLoadingStatus);
+  const isFullOfferLoading = useAppSelector(getFullOfferLoadingStatus);
   const currentOfferData = useAppSelector(getFullOfferData);
   const reviews = useAppSelector(getReviews);
   const nearbyPlaces = useAppSelector(getNearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
@@ -43,7 +42,7 @@ function OfferPage(): JSX.Element {
     }
   }, [activeOfferId, dispatch]);
 
-  if (isFullOfferDataLoading) {
+  if (isFullOfferLoading) {
     return (
       <LoadingPage />
     );
@@ -52,6 +51,7 @@ function OfferPage(): JSX.Element {
   if (!currentOfferData) {
     return <NotFoundPage />;
   }
+
   const { isPremium, description, rating, type, bedrooms, maxAdults, price, title, isFavorite, goods, host, images } = currentOfferData;
   const mapPoints = getMapPoints(nearbyPlaces, currentOfferData);
 

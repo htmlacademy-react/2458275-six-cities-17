@@ -3,6 +3,7 @@ import {NameSpace, AuthorizationStatus} from '../../consts';
 import {UserProcess} from '../../types/state-types';
 import {checkAuthAction, loginAction, logoutAction} from '../api-actions';
 import {saveToken, dropToken} from '../../services/token';
+import {toast} from 'react-toastify';
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -31,11 +32,16 @@ export const userProcessSlice = createSlice({
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.userData = null;
+        toast.warn('Something went wrong while trying to log in. Please try again');
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.userData = null;
         dropToken();
+      })
+      .addCase(logoutAction.rejected, (state) => {
+        state.authorizationStatus = AuthorizationStatus.Auth;
+        toast.warn('Something went wrong while trying to log out. Please try again');
       });
   }
 });

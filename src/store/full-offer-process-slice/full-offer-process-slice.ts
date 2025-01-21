@@ -2,12 +2,12 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../consts';
 import {FullOfferProcess} from '../../types/state-types';
 import {fetchOfferDataAction, fetchNearbyPlacesAction} from '../api-actions';
+import {toast} from 'react-toastify';
 
 const initialState: FullOfferProcess = {
   fullOfferData: null,
   nearbyPlaces: [],
   isFullOfferDataLoading: false,
-  isNearbyPlacesLoading: false,
 };
 
 export const fullOfferProcessSlice = createSlice({
@@ -25,9 +25,7 @@ export const fullOfferProcessSlice = createSlice({
       })
       .addCase(fetchOfferDataAction.rejected, (state) => {
         state.isFullOfferDataLoading = false;
-      })
-      .addCase(fetchNearbyPlacesAction.pending, (state) => {
-        state.isNearbyPlacesLoading = true;
+        toast.warn('Something went wrong while loading the offer. Please try again');
       })
       .addCase(fetchNearbyPlacesAction.fulfilled, (state, action) => {
         state.nearbyPlaces = action.payload;
@@ -35,6 +33,7 @@ export const fullOfferProcessSlice = createSlice({
       })
       .addCase(fetchNearbyPlacesAction.rejected, (state) => {
         state.isNearbyPlacesLoading = false;
+        toast.warn('Something went wrong while loading the nearby places. If you want to see the nearby places, try reloading the page');
       });
   }
 });

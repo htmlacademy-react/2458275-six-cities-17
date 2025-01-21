@@ -2,10 +2,11 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace, Status} from '../../consts';
 import {ReviewProcess} from '../../types/state-types';
 import {fetchOfferReviewsAction, postCommentAction} from '../api-actions';
+import {toast} from 'react-toastify';
+
 
 const initialState: ReviewProcess = {
   reviews: [],
-  isReviewsDataLoading: false,
   newReviewPostingStatus: Status.Idle,
 };
 
@@ -15,15 +16,11 @@ export const ReviewProcessSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchOfferReviewsAction.pending, (state) => {
-        state.isReviewsDataLoading = true;
-      })
       .addCase(fetchOfferReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
-        state.isReviewsDataLoading = false;
       })
-      .addCase(fetchOfferReviewsAction.rejected, (state) => {
-        state.isReviewsDataLoading = false;
+      .addCase(fetchOfferReviewsAction.rejected, () => {
+        toast.warn('Something went wrong while loading reviews. If you want to see the reviews, try reloading the page');
       })
       .addCase(postCommentAction.pending, (state) => {
         state.newReviewPostingStatus = Status.Loading;
@@ -35,6 +32,7 @@ export const ReviewProcessSlice = createSlice({
       })
       .addCase(postCommentAction.rejected, (state) => {
         state.newReviewPostingStatus = Status.Error;
+        toast.warn('Something went wrong while posting your review. Please try again, your opinion is really important for us');
       });
   }
 });
