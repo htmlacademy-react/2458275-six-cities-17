@@ -74,6 +74,11 @@ export enum CardType {
   Favourites = 'favorites',
 }
 
+export enum FavouriteButtonType {
+  FullOfferButton = 'OFFER_BUTTON',
+  PlaceCardButton = 'PLACE_CARD_BUTTON',
+}
+
 export enum SortingOption {
   Default = 'Popular',
   MinPriceFirst = 'Price: low to high',
