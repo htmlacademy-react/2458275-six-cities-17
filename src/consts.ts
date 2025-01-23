@@ -143,6 +143,10 @@ export const OfferCardCount = {
   Min: 0,
   Max: 3,
 };
+export const ImagesCount = {
+  Min: 0,
+  Max: 6,
+};
 
 export const MapIconInfo = {
   iconSize: [27, 39],

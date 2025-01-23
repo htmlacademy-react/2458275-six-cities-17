@@ -11,7 +11,7 @@ import ReviewsContainer from '../../components/reviews-container/reviews-contain
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
 import Map from '../../components/map/map';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {CardType, MapTypes, OfferCardCount, FavouriteButtonType} from '../../consts';
+import {CardType, MapTypes, OfferCardCount, FavouriteButtonType, ImagesCount} from '../../consts';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
@@ -49,6 +49,7 @@ function OfferPage(): JSX.Element {
 
   const { isPremium, description, rating, type, bedrooms, maxAdults, price, title, isFavorite, goods, host, images } = currentOfferData;
   const mapPoints = getMapPoints(nearbyPlaces, currentOfferData);
+  const displayedImages = images.slice(ImagesCount.Min, ImagesCount.Max);
 
   return (
     <div className="page">
@@ -58,7 +59,7 @@ function OfferPage(): JSX.Element {
       <Header/>
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferGallery images={images}/>
+          <OfferGallery images={displayedImages}/>
           <div className="offer__container container">
             <div className="offer__wrapper">
               {isPremium && (<div className="offer__mark"><span>Premium</span></div>)}
