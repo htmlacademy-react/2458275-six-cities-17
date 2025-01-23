@@ -18,7 +18,7 @@ function Header(): JSX.Element {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                {<ProfileSignInNavigation authorizationStatus={currentAuthorizationStatus}/>}
+                {<ProfileSignInNavigation />}
               </li>
               {currentAuthorizationStatus === AuthorizationStatus.Auth && <ProfileSignOutNavigation/>}
             </ul>
