@@ -8,6 +8,8 @@ import {toast} from 'react-toastify';
 const initialState: ReviewProcess = {
   reviews: [],
   newReviewPostingStatus: Status.Idle,
+  isReviewsDataLoading: true,
+
 };
 
 export const ReviewProcessSlice = createSlice({
@@ -29,6 +31,7 @@ export const ReviewProcessSlice = createSlice({
         state.newReviewPostingStatus = Status.Success;
         state.reviews.push(action.payload);
         state.newReviewPostingStatus = Status.Idle;
+        toast.success('Your review is posted');
       })
       .addCase(postCommentAction.rejected, (state) => {
         state.newReviewPostingStatus = Status.Error;

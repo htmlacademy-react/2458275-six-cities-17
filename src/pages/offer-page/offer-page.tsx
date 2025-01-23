@@ -17,11 +17,14 @@ import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
 import {capitalize, getMapPoints} from '../../utils/common';
 import {getCurrentCity} from '../../store/app-process-slice/selectors';
-import {getFullOfferLoadingStatus, getFullOfferData, getNearbyPlaces} from '../../store/full-offer-process-slice/selectors';
+import {getFullOfferLoadingStatus, getNearbyPlacesLoadingStatus, getFullOfferData, getNearbyPlaces} from '../../store/full-offer-process-slice/selectors';
+import {getReviewsLoadingStatus} from '../../store/review-process-slice/selectors';
 
 function OfferPage(): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
   const isFullOfferLoading = useAppSelector(getFullOfferLoadingStatus);
+  const isReviewsDataLoading = useAppSelector(getReviewsLoadingStatus);
+  const isNearbyPlacesDataLoading = useAppSelector(getNearbyPlacesLoadingStatus);
   const currentOfferData = useAppSelector(getFullOfferData);
   const nearbyPlaces = useAppSelector(getNearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
 
@@ -31,13 +34,16 @@ function OfferPage(): JSX.Element {
 
   useEffect(() => {
     if (activeOfferId) {
-      dispatch(fetchOfferDataAction(activeOfferId));
-      dispatch(fetchOfferReviewsAction(activeOfferId));
-      dispatch(fetchNearbyPlacesAction(activeOfferId));
+      dispatch(fetchOfferDataAction(activeOfferId)).then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          dispatch(fetchOfferReviewsAction(activeOfferId));
+          dispatch(fetchNearbyPlacesAction(activeOfferId));
+        }
+      });
     }
   }, [activeOfferId, dispatch]);
 
-  if (isFullOfferLoading) {
+  if (isFullOfferLoading && isReviewsDataLoading && isNearbyPlacesDataLoading) {
     return (
       <LoadingPage />
     );

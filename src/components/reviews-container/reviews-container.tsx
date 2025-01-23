@@ -11,10 +11,10 @@ function ReviewsContainer(): JSX.Element {
 
   return (
     <section className="offer__reviews reviews">
-      {reviews.length > 0 ? (
+      {reviews.length > 0 && (
         <h2 className="reviews__title">
   Reviews · <span className="reviews__amount">{reviews.length}</span>
-        </h2>) : ''}
+        </h2>)}
       <ReviewsList reviews={reviews} />
       {currentAuthorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
     </section>

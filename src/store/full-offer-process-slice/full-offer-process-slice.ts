@@ -7,7 +7,8 @@ import {toast} from 'react-toastify';
 const initialState: FullOfferProcess = {
   fullOfferData: null,
   nearbyPlaces: [],
-  isFullOfferDataLoading: false,
+  isFullOfferDataLoading: true,
+  isNearbyPlacesDataLoading: true,
 };
 
 export const fullOfferProcessSlice = createSlice({
@@ -26,6 +27,9 @@ export const fullOfferProcessSlice = createSlice({
       .addCase(fetchOfferDataAction.rejected, (state) => {
         state.isFullOfferDataLoading = false;
         toast.warn('Something went wrong while loading the offer. Please try again');
+      })
+      .addCase(fetchNearbyPlacesAction.pending, (state) => {
+        state.isNearbyPlacesDataLoading = true;
       })
       .addCase(fetchNearbyPlacesAction.fulfilled, (state, action) => {
         state.nearbyPlaces = action.payload;
