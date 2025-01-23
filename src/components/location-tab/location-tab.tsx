@@ -3,12 +3,12 @@ import {changeCity} from '../../store/app-process-slice/app-process-slice';
 import {useAppDispatch} from '../../hooks/index';
 import {OfferCity} from '../../types/offers-types';
 
-type currentLocationProps = {
-  currentLocation: OfferCity;
+type LocationTabProps = {
   city: OfferCity;
+  isTabActive: boolean;
 }
 
-function LocationTabTemplate({currentLocation, city}: currentLocationProps): JSX.Element {
+function LocationTabTemplate({city, isTabActive}: LocationTabProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const onTabClick = useCallback((evt: MouseEvent<HTMLAnchorElement>) => {
@@ -19,7 +19,7 @@ function LocationTabTemplate({currentLocation, city}: currentLocationProps): JSX
   return (
     <li key={city.name} className="locations__item">
       <a
-        className={`locations__item-link tabs__item ${city.name === currentLocation.name ? 'tabs__item--active' : ''}`}
+        className={`locations__item-link tabs__item ${isTabActive && 'tabs__item--active'}`}
         href="#"
         onClick={onTabClick}
       >

@@ -30,7 +30,7 @@ function MainPage(){
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <LocationsList currentLocation={currentCity}/>
+        <LocationsList currentCity={currentCity}/>
         <div className="cities">
           {cityOffers.length > 0 ?
             <PlacesContainer currentLocation={currentCity} offers={cityOffers}/> : <PacesEmptyContainer currentLocation={currentCity}/> }

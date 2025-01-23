@@ -2,11 +2,10 @@ import LocationTab from '../../components/location-tab/location-tab';
 import {CITIES} from '../../consts';
 import {OfferCity} from '../../types/offers-types';
 
-type currentLocationProps = {
-  currentLocation: OfferCity;
+type LocationsListProps = {
+  currentCity: OfferCity;
 }
-
-function LocationsList({currentLocation}: currentLocationProps): JSX.Element {
+function LocationsList({currentCity}: LocationsListProps): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
@@ -14,8 +13,8 @@ function LocationsList({currentLocation}: currentLocationProps): JSX.Element {
           {CITIES.map((city) => (
             <LocationTab
               key={city.name}
-              currentLocation={currentLocation}
               city={city}
+              isTabActive = {currentCity.name === city.name}
             />
           ))}
         </ul>
