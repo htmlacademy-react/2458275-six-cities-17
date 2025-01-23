@@ -1,10 +1,10 @@
 import {SortingOption} from '../../consts';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {changeSortingOption} from '../../store/app-process-slice/app-process-slice';
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef, memo} from 'react';
 import {getCurrentSortingOption} from '../../store/app-process-slice/selectors';
 
-function PlacesSorting():JSX.Element {
+function PlacesSortingTemplate():JSX.Element {
   const dispatch = useAppDispatch();
   const currentSortingOption = useAppSelector(getCurrentSortingOption);
 
@@ -54,5 +54,6 @@ function PlacesSorting():JSX.Element {
       </ul>
     </form>);
 }
+const PlacesSorting = memo(PlacesSortingTemplate);
 
 export default PlacesSorting;

@@ -1,4 +1,4 @@
-import OfferCard from '../../components/offer-card/offer-card';
+import OfferCard from '../offer-card/offer-card';
 import {Offer} from '../../types/offers-types';
 
 type OffersListProps = {
@@ -6,10 +6,11 @@ type OffersListProps = {
   onActiveOfferCardChange?: (id: string | null) => void;
   cardType: string;
 }
+const getListClassName = (cardType: string) => (cardType === 'favorites' ? 'favorites__places' : `places__list ${cardType === 'cities' ? 'cities__places-list tabs__content' : 'near-places__list'}`);
 
 function OffersList({offers, cardType, onActiveOfferCardChange}: OffersListProps): JSX.Element {
   return (
-    <div className={cardType === 'favorites' ? 'favorites__places' : `places__list ${cardType === 'cities' ? 'cities__places-list tabs__content' : 'near-places__list'}` }>
+    <div className={getListClassName(cardType)}>
       {
         offers.map((offer) => (
           <OfferCard
