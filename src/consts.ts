@@ -79,6 +79,11 @@ export enum FavouriteButtonType {
   PlaceCardButton = 'PLACE_CARD_BUTTON',
 }
 
+export enum LogoType {
+  Header = 'header',
+  Footer = 'footer',
+}
+
 export enum SortingOption {
   Default = 'Popular',
   MinPriceFirst = 'Price: low to high',

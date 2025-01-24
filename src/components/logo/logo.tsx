@@ -1,11 +1,22 @@
 import {memo} from 'react';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../consts';
+import {AppRoute, LogoType} from '../../consts';
 
-function LogoTemplate(): JSX.Element {
+type LogoTemplateProps = {
+  logoType: LogoType;
+}
+function LogoTemplate({logoType}: LogoTemplateProps): JSX.Element {
+  const logoWidth = logoType === LogoType.Header ? '81' : '64';
+  const logoHeight = logoType === LogoType.Header ? '41' : '33';
   return (
-    <Link className="header__logo-link" to={AppRoute.Main}>
-      <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+    <Link className={`${logoType}__logo-link`} to={AppRoute.Main}>
+      <img
+        className={`${logoType}`}
+        src="img/logo.svg"
+        alt="6 cities logo"
+        width={logoWidth}
+        height={logoHeight}
+      />
     </Link>
   );
 }

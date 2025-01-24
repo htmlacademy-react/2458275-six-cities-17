@@ -1,7 +1,7 @@
 import Logo from '../../components/logo/logo';
 import ProfileSignOutNavigation from '../profile-sign-out-navigation/profile-sign-out-navigation';
 import ProfileSignInNavigation from '../profile-sign-in-navigation/profile-sign-in-navigation';
-import {AuthorizationStatus} from '../../consts';
+import {AuthorizationStatus, LogoType} from '../../consts';
 import {useAppSelector} from '../../hooks/index';
 import {getAuthorizationStatus} from '../../store/user-process-slice/selectors';
 
@@ -13,7 +13,7 @@ function Header(): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo />
+            <Logo logoType={LogoType.Header}/>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
