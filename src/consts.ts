@@ -49,15 +49,12 @@ export const CITIES = [
   }
 ] as const;
 
-export const Setting = {
-  placeCardsCount: 5
-};
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
+  NotFound = '404',
 }
 
 export enum AuthorizationStatus {
@@ -77,6 +74,11 @@ export enum CardType {
   Favourites = 'favorites',
 }
 
+export enum FavouriteButtonType {
+  FullOfferButton = 'OFFER_BUTTON',
+  PlaceCardButton = 'PLACE_CARD_BUTTON',
+}
+
 export enum SortingOption {
   Default = 'Popular',
   MinPriceFirst = 'Price: low to high',
@@ -90,6 +92,21 @@ export enum APIRoute {
   Logout = '/logout',
   Comments= '/comments',
   NearbyPlaces='/nearby',
+}
+
+export enum NameSpace {
+  App = 'App',
+  Offers = 'Offers',
+  FullOffer = 'FullOffer',
+  User = 'User',
+  Review = 'Review',
+}
+
+export enum Status {
+  Idle = 'Idle',
+  Loading= 'Loading',
+  Success = 'Success',
+  Error = 'Error',
 }
 
 export const RATINGS = [
@@ -125,6 +142,10 @@ export const Comment = {
 export const OfferCardCount = {
   Min: 0,
   Max: 3,
+};
+export const ImagesCount = {
+  Min: 0,
+  Max: 6,
 };
 
 export const MapIconInfo = {

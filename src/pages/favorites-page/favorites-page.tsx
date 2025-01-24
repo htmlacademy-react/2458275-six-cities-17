@@ -4,10 +4,11 @@ import {Helmet} from 'react-helmet-async';
 import Header from '../../components/header/header';
 import FavoritePlacesList from '../../components/favorite-places-list/favorite-places-list';
 import {useAppSelector} from '../../hooks/index';
+import { getOffersData } from '../../store/offers-process-slice/selectors';
 
 
 function FavoritesPage(){
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffersData);
   return (
     <div className="page">
       <Helmet>

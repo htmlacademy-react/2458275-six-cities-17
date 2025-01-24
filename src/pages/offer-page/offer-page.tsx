@@ -7,25 +7,26 @@ import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import Rating from '../../components/rating/rating';
 import OfferHost from '../../components/offer-host/offer-host';
 import OffersList from '../../components/offers-list/offers-list';
-import ReviewForm from '../../components/review-form/review-form';
-import ReviewsList from '../../components/reviews-list/reviews-list';
+import ReviewsContainer from '../../components/reviews-container/reviews-container';
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
 import Map from '../../components/map/map';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {CardType, MapTypes, AuthorizationStatus} from '../../consts';
+import {CardType, MapTypes, OfferCardCount, FavouriteButtonType, ImagesCount} from '../../consts';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
 import {capitalize, getMapPoints} from '../../utils/common';
-import {OfferCardCount} from '../../consts';
+import {getCurrentCity} from '../../store/app-process-slice/selectors';
+import {getFullOfferLoadingStatus, getNearbyPlacesLoadingStatus, getFullOfferData, getNearbyPlaces} from '../../store/full-offer-process-slice/selectors';
+import {getReviewsLoadingStatus} from '../../store/review-process-slice/selectors';
 
 function OfferPage(): JSX.Element {
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const currentAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isDataLoading = useAppSelector((state) => state.isDataLoading);
-  const currentOfferData = useAppSelector((state) => state.offerData);
-  const reviews = useAppSelector((state) => state.reviews);
-  const nearbyPlaces = useAppSelector((state) => state.nearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
+  const currentCity = useAppSelector(getCurrentCity);
+  const isFullOfferLoading = useAppSelector(getFullOfferLoadingStatus);
+  const isReviewsDataLoading = useAppSelector(getReviewsLoadingStatus);
+  const isNearbyPlacesDataLoading = useAppSelector(getNearbyPlacesLoadingStatus);
+  const currentOfferData = useAppSelector(getFullOfferData);
+  const nearbyPlaces = useAppSelector(getNearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
 
   const params = useParams();
   const activeOfferId = params.id;
@@ -33,13 +34,16 @@ function OfferPage(): JSX.Element {
 
   useEffect(() => {
     if (activeOfferId) {
-      dispatch(fetchOfferDataAction(activeOfferId));
-      dispatch(fetchOfferReviewsAction(activeOfferId));
-      dispatch(fetchNearbyPlacesAction(activeOfferId));
+      dispatch(fetchOfferDataAction(activeOfferId)).then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          dispatch(fetchOfferReviewsAction(activeOfferId));
+          dispatch(fetchNearbyPlacesAction(activeOfferId));
+        }
+      });
     }
   }, [activeOfferId, dispatch]);
 
-  if (isDataLoading) {
+  if (isFullOfferLoading && isReviewsDataLoading && isNearbyPlacesDataLoading) {
     return (
       <LoadingPage />
     );
@@ -48,8 +52,10 @@ function OfferPage(): JSX.Element {
   if (!currentOfferData) {
     return <NotFoundPage />;
   }
+
   const { isPremium, description, rating, type, bedrooms, maxAdults, price, title, isFavorite, goods, host, images } = currentOfferData;
   const mapPoints = getMapPoints(nearbyPlaces, currentOfferData);
+  const displayedImages = images.slice(ImagesCount.Min, ImagesCount.Max);
 
   return (
     <div className="page">
@@ -59,7 +65,7 @@ function OfferPage(): JSX.Element {
       <Header/>
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferGallery images={images}/>
+          <OfferGallery images={displayedImages}/>
           <div className="offer__container container">
             <div className="offer__wrapper">
               {isPremium && (<div className="offer__mark"><span>Premium</span></div>)}
@@ -67,7 +73,7 @@ function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <FavoriteButton buttonType={'activeOfferButton'} isFavorite={isFavorite} />
+                <FavoriteButton buttonType={FavouriteButtonType.FullOfferButton} isFavorite={isFavorite} />
               </div>
               <Rating ratingType={'averageOfferRating'} ratingValue={rating}/>
               <ul className="offer__features">
@@ -93,14 +99,7 @@ function OfferPage(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <section className="offer__reviews reviews">
-                {reviews.length > 0 ? (
-                  <h2 className="reviews__title">
-              Reviews · <span className="reviews__amount">{reviews.length}</span>
-                  </h2>) : ''}
-                <ReviewsList reviews={reviews} />
-                {currentAuthorizationStatus === AuthorizationStatus.Auth && <ReviewForm />}
-              </section>
+              <ReviewsContainer/>
             </div>
           </div>
           <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
