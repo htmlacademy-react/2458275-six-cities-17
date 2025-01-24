@@ -92,6 +92,7 @@ export enum APIRoute {
   Logout = '/logout',
   Comments= '/comments',
   NearbyPlaces='/nearby',
+  Favourite = 'favorite'
 }
 
 export enum NameSpace {
@@ -100,6 +101,7 @@ export enum NameSpace {
   FullOffer = 'FullOffer',
   User = 'User',
   Review = 'Review',
+  Favorite = 'Favorite',
 }
 
 export enum Status {

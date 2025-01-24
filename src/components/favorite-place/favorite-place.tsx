@@ -1,9 +1,10 @@
 import {Offer} from '../../types/offers-types';
+import {CardType} from '../../consts';
 import OffersList from '../offers-list/offers-list';
 
 type FavoritePlaceProps = {
   offers: Offer[];
-  cardType: string;
+  cardType: CardType;
   city: string;
 }
 

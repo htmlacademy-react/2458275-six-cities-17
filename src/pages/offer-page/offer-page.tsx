@@ -53,7 +53,7 @@ function OfferPage(): JSX.Element {
     return <NotFoundPage />;
   }
 
-  const { isPremium, description, rating, type, bedrooms, maxAdults, price, title, isFavorite, goods, host, images } = currentOfferData;
+  const { isPremium, description, rating, type, bedrooms, maxAdults, price, title, goods, host, images } = currentOfferData;
   const mapPoints = getMapPoints(nearbyPlaces, currentOfferData);
   const displayedImages = images.slice(ImagesCount.Min, ImagesCount.Max);
 
@@ -73,7 +73,7 @@ function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <FavoriteButton buttonType={FavouriteButtonType.FullOfferButton} isFavorite={isFavorite} />
+                { activeOfferId && <FavoriteButton buttonType={FavouriteButtonType.FullOfferButton} offerId={activeOfferId} /> }
               </div>
               <Rating ratingType={'averageOfferRating'} ratingValue={rating}/>
               <ul className="offer__features">
