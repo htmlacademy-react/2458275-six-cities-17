@@ -1,10 +1,11 @@
 import {Link} from 'react-router-dom';
+import {memo} from 'react';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 import {useAppSelector} from '../../hooks/index';
 import {getUserData, getAuthorizationStatus} from '../../store/user-process-slice/selectors';
 import {getFavoriteOffersData} from '../../store/favorite-process-slice/selectors';
 
-function ProfileSignInNavigation(): JSX.Element {
+function ProfileSignInNavigationTemplate(): JSX.Element {
   const currentUserData = useAppSelector(getUserData);
   const userEmail = currentUserData && currentUserData.email;
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -23,5 +24,5 @@ function ProfileSignInNavigation(): JSX.Element {
     </Link>
   );
 }
-
+const ProfileSignInNavigation = memo(ProfileSignInNavigationTemplate);
 export default ProfileSignInNavigation;

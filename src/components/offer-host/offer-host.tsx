@@ -1,9 +1,10 @@
+import {memo} from 'react';
 type OfferHostProps = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
 }
-function OfferHost({name, avatarUrl, isPro}: OfferHostProps): JSX.Element {
+function OfferHostTemplate({name, avatarUrl, isPro}: OfferHostProps): JSX.Element {
 
   return (
     <div className="offer__host-user user">
@@ -22,5 +23,5 @@ function OfferHost({name, avatarUrl, isPro}: OfferHostProps): JSX.Element {
   );
 
 }
-
+const OfferHost = memo(OfferHostTemplate);
 export default OfferHost;

@@ -59,5 +59,4 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
     </article>
   );
 }
-
 export default OfferCard;

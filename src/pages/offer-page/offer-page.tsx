@@ -6,12 +6,12 @@ import FavoriteButton from '../../components/favorite-button/favorite-button';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import Rating from '../../components/rating/rating';
 import OfferHost from '../../components/offer-host/offer-host';
-import OffersList from '../../components/offers-list/offers-list';
 import ReviewsContainer from '../../components/reviews-container/reviews-container';
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
 import Map from '../../components/map/map';
+import NearPlacesContainer from '../../components/near-places-container/near-places-container';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {CardType, MapTypes, OfferCardCount, FavouriteButtonType, ImagesCount} from '../../consts';
+import {MapTypes, OfferCardCount, FavouriteButtonType, ImagesCount} from '../../consts';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
@@ -105,16 +105,7 @@ function OfferPage(): JSX.Element {
           <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">
-          Other places in the neighbourhood
-            </h2>
-            {nearbyPlaces && (
-              <div className="near-places__list places__list">
-                <OffersList offers={nearbyPlaces} cardType={CardType.Offer}/>
-              </div>
-            )}
-          </section>
+          {nearbyPlaces && <NearPlacesContainer />}
         </div>
       </main>
     </div>

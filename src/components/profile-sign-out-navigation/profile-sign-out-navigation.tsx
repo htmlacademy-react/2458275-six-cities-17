@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom';
+import {memo} from 'react';
 import { useAppDispatch} from '../../hooks/index';
 import {logoutAction} from '../../store/api-actions';
 
-function ProfileSignOutNavigation (): JSX.Element {
+function ProfileSignOutNavigationTemplate(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -20,4 +21,5 @@ function ProfileSignOutNavigation (): JSX.Element {
     </li>
   );
 }
+const ProfileSignOutNavigation = memo(ProfileSignOutNavigationTemplate);
 export default ProfileSignOutNavigation;
