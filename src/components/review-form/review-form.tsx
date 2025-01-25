@@ -24,13 +24,13 @@ function ReviewForm():JSX.Element {
   || formData.comment.length > Comment.MaxLength
   || isCommentPosting === Status.Loading;
 
-  const handleValueChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
-    const {value} = e.target;
-    setFormData(e.target.name === 'review' ? {...formData, comment: value} : {...formData, rating: Number(value)});
+  const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
+    const {value} = evt.target;
+    setFormData(evt.target.name === 'review' ? {...formData, comment: value} : {...formData, rating: Number(value)});
   };
 
-  const handleFormSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleFormSubmit = (evt: ChangeEvent<HTMLFormElement>) => {
+    evt.preventDefault();
 
     if (reviewedOffer) {
       dispatch(postCommentAction({

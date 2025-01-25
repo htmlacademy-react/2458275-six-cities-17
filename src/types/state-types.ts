@@ -33,3 +33,8 @@ export type ReviewProcess = {
   newReviewPostingStatus: Status;
   isReviewsDataLoading: boolean;
 }
+
+export type FavoriteOffersProcess = {
+favoriteOffers: Offer[];
+isFavoriteOffersDataLoading: boolean;
+}

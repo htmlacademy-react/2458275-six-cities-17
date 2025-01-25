@@ -8,7 +8,7 @@ const initialState: AppProcess = {
   currentSortingOption: SortingOption.Default,
 };
 
-export const AppProcessSlice = createSlice({
+export const appProcessSlice = createSlice({
   name: NameSpace.App,
   initialState,
   reducers: {
@@ -21,6 +21,6 @@ export const AppProcessSlice = createSlice({
   },
 });
 
-export const {changeCity, changeSortingOption} = AppProcessSlice.actions;
+export const {changeCity, changeSortingOption} = appProcessSlice.actions;
 
 

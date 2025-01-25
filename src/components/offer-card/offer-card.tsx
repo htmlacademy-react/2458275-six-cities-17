@@ -11,7 +11,7 @@ type OfferCardProps = {
 }
 
 function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): JSX.Element {
-  const {title, type, price, isPremium, rating, previewImage, isFavorite, id} = offer;
+  const {title, type, price, isPremium, rating, previewImage, id} = offer;
   const cardClassName = cardType === 'favorites' ? 'favorites__card-info place-card__info' : 'place-card__info';
   const cardWidth = cardType === 'favorites' ? 150 : 260;
   const cardHeight = cardType === 'favorites' ? 110 : 200;
@@ -43,7 +43,7 @@ function OfferCard({offer, cardType, onActiveOfferCardChange}: OfferCardProps): 
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton buttonType={FavouriteButtonType.PlaceCardButton} isFavorite={isFavorite}/>
+          <FavoriteButton buttonType={FavouriteButtonType.PlaceCardButton} offerId={id}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

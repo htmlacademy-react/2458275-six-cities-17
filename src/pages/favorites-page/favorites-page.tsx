@@ -1,14 +1,22 @@
-import {Link} from 'react-router-dom';
-import {AppRoute, CardType} from '../../consts';
+import {LogoType} from '../../consts';
 import {Helmet} from 'react-helmet-async';
-import Header from '../../components/header/header';
-import FavoritePlacesList from '../../components/favorite-places-list/favorite-places-list';
 import {useAppSelector} from '../../hooks/index';
-import { getOffersData } from '../../store/offers-process-slice/selectors';
-
+import {getFavoriteOffersData, getFavoriteOffersLoadingStatus} from '../../store/favorite-process-slice/selectors';
+import LoadingPage from '../../pages/loading-page/loading-page';
+import Header from '../../components/header/header';
+import Logo from '../../components/logo/logo';
+import FavoritePlacesContainer from '../../components/favorite-places-container/favorite-places-container';
+import FavoritePlacesEmptyContainer from '../../components/favorite-places-container/favorite-places-empty-container';
 
 function FavoritesPage(){
-  const offers = useAppSelector(getOffersData);
+  const favoriteOffersAmount = useAppSelector(getFavoriteOffersData).length;
+  const isFavoriteOffersDataLoading = useAppSelector(getFavoriteOffersLoadingStatus);
+
+  if (isFavoriteOffersDataLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
   return (
     <div className="page">
       <Helmet>
@@ -17,22 +25,11 @@ function FavoritesPage(){
       <Header/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritePlacesList offers={offers} cardType={CardType.Favourites}/>
-          </section>
+          {favoriteOffersAmount > 0 ? <FavoritePlacesContainer /> : <FavoritePlacesEmptyContainer />}
         </div>
       </main>
       <footer className="footer container">
-        <Link className="footer__logo-link" to={AppRoute.Main}>
-          <img
-            className="footer__logo"
-            src="img/logo.svg"
-            alt="6 cities logo"
-            width={64}
-            height={33}
-          />
-        </Link>
+        <Logo logoType={LogoType.Footer}/>
       </footer>
     </div>
   );

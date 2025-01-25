@@ -12,7 +12,7 @@ const initialState: ReviewProcess = {
 
 };
 
-export const ReviewProcessSlice = createSlice({
+export const reviewProcessSlice = createSlice({
   name: NameSpace.Review,
   initialState,
   reducers: {},

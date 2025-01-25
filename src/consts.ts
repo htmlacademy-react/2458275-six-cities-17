@@ -79,6 +79,11 @@ export enum FavouriteButtonType {
   PlaceCardButton = 'PLACE_CARD_BUTTON',
 }
 
+export enum LogoType {
+  Header = 'header',
+  Footer = 'footer',
+}
+
 export enum SortingOption {
   Default = 'Popular',
   MinPriceFirst = 'Price: low to high',
@@ -92,6 +97,7 @@ export enum APIRoute {
   Logout = '/logout',
   Comments= '/comments',
   NearbyPlaces='/nearby',
+  Favourite = 'favorite'
 }
 
 export enum NameSpace {
@@ -100,6 +106,7 @@ export enum NameSpace {
   FullOffer = 'FullOffer',
   User = 'User',
   Review = 'Review',
+  Favorite = 'Favorite',
 }
 
 export enum Status {

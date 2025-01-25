@@ -1,14 +1,15 @@
-import {Offer} from '../../types/offers-types';
 import FavoritePlace from '../favorite-place/favorite-place';
 import {groupOffersByCity} from '../../utils/common';
+import {CardType} from '../../consts';
+import {useAppSelector} from '../../hooks/index';
+import {getFavoriteOffersData} from '../../store/favorite-process-slice/selectors';
 
 type FavoritePlacesListProps = {
-  offers: Offer[];
-  cardType: string;
+  cardType: CardType;
 }
 
-function FavoritePlacesList({offers, cardType}: FavoritePlacesListProps): JSX.Element {
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+function FavoritePlacesList({cardType}: FavoritePlacesListProps): JSX.Element {
+  const favoriteOffers = useAppSelector(getFavoriteOffersData);
   const groupedOffes = groupOffersByCity(favoriteOffers);
 
   return (
