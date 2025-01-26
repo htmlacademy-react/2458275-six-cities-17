@@ -8,6 +8,7 @@ const initialState: FullOfferProcess = {
   fullOfferData: null,
   nearbyPlaces: [],
   isFullOfferDataLoading: true,
+  isFullOfferLoadingError: false,
   isNearbyPlacesDataLoading: true,
 };
 
@@ -19,13 +20,16 @@ export const fullOfferProcessSlice = createSlice({
     builder
       .addCase(fetchOfferDataAction.pending, (state) => {
         state.isFullOfferDataLoading = true;
+        state.isFullOfferLoadingError = false;
       })
       .addCase(fetchOfferDataAction.fulfilled, (state, action) => {
         state.fullOfferData = action.payload;
+        state.isFullOfferLoadingError = false;
         state.isFullOfferDataLoading = false;
       })
       .addCase(fetchOfferDataAction.rejected, (state) => {
         state.isFullOfferDataLoading = false;
+        state.isFullOfferLoadingError = true;
         toast.error('Something went wrong while loading the offer. Please try again');
       })
       .addCase(fetchNearbyPlacesAction.pending, (state) => {

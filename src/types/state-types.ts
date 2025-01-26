@@ -25,6 +25,7 @@ export type FullOfferProcess = {
   fullOfferData: FullOffer | null;
   nearbyPlaces: Offer[];
   isFullOfferDataLoading: boolean;
+  isFullOfferLoadingError: boolean;
   isNearbyPlacesDataLoading: boolean;
 }
 
