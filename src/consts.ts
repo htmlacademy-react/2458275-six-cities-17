@@ -139,7 +139,7 @@ export const Comment = {
   MaxLength: 300,
   MinAmount: 0,
   MaxAmount: 10,
-  InitialState: ' ',
+  InitialState: '',
 };
 
 export const OfferCardsCount = {

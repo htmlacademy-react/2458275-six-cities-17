@@ -5,10 +5,10 @@ type OfferHostProps = {
   isPro: boolean;
 }
 function OfferHostTemplate({name, avatarUrl, isPro}: OfferHostProps): JSX.Element {
-
+  const avatarClassName = `offer__avatar-wrapper user__avatar-wrapper ${isPro && 'offer__avatar-wrapper--pro'}`;
   return (
     <div className="offer__host-user user">
-      <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+      <div className={avatarClassName}>
         <img
           className="offer__avatar user__avatar"
           src={avatarUrl}
