@@ -26,7 +26,7 @@ export const fullOfferProcessSlice = createSlice({
       })
       .addCase(fetchOfferDataAction.rejected, (state) => {
         state.isFullOfferDataLoading = false;
-        toast.warn('Something went wrong while loading the offer. Please try again');
+        toast.error('Something went wrong while loading the offer. Please try again');
       })
       .addCase(fetchNearbyPlacesAction.pending, (state) => {
         state.isNearbyPlacesDataLoading = true;

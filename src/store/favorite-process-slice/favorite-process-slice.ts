@@ -24,7 +24,7 @@ export const favoriteProcessSlice = createSlice({
       })
       .addCase(fetchFavoriteOffersAction.rejected, (state) => {
         state.isFavoriteOffersDataLoading = false;
-        toast.warn('Something went wrong while loading favorite offers. Please try again');
+        toast.error('Something went wrong while loading favorite offers. Please try again');
       })
       .addCase(toggleFavoriteSatusAction.fulfilled, (state, action) => {
         if (action.payload.isFavorite) {
@@ -37,7 +37,7 @@ export const favoriteProcessSlice = createSlice({
         }
       })
       .addCase(toggleFavoriteSatusAction.rejected, () => {
-        toast.warn('Something went wrong while changing the offer status. Please try again');
+        toast.error('Something went wrong while changing the offer status. Please try again');
       });
   }
 });

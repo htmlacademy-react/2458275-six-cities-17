@@ -35,7 +35,7 @@ export const reviewProcessSlice = createSlice({
       })
       .addCase(postCommentAction.rejected, (state) => {
         state.newReviewPostingStatus = Status.Error;
-        toast.warn('Something went wrong while posting your review. Please try again, your opinion is really important for us');
+        toast.error('Something went wrong while posting your review. Please try again, your opinion is really important for us');
       });
   }
 });
