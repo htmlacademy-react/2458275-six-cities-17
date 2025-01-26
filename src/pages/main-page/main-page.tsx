@@ -15,7 +15,7 @@ function MainPage(){
   const isDataLoading = useAppSelector(getOffersLoadingStatus);
 
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity.name);
-
+  const mainClassName = `page__main page__main--index ${cityOffers.length === 0 && 'page__main--index-empty'}`;
   if (isDataLoading) {
     return (
       <LoadingPage />
@@ -28,7 +28,7 @@ function MainPage(){
         <title>6 cities</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--index">
+      <main className={mainClassName}>
         <h1 className="visually-hidden">Cities</h1>
         <LocationsList currentCity={currentCity}/>
         <div className="cities">

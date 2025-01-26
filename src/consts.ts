@@ -117,7 +117,7 @@ export enum SortingOption {
 }
 
 export enum APIRoute {
-  Offers = '/offers',
+  Offers = '/offer',
   Login = '/login',
   Logout = '/logout',
   Comments= '/comments',
