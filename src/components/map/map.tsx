@@ -3,19 +3,19 @@ import leaflet, {Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
 import useMap from '../../hooks/use-map';
-import {MapIcon, MapTypes} from '../../consts';
+import {MapIcon, MapType} from '../../consts';
 import {Location, offerMapPoint} from '../../types/offers-types';
 
 type MapProps = {
   cityLocation: Location;
-  mapType: MapTypes;
+  mapType: MapType;
   activeOffer?: string | null;
   mapPoints: offerMapPoint[];
 };
 
 function Map({cityLocation, mapPoints, mapType, activeOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const shouldZoomScroll = mapType === MapTypes.Main;
+  const shouldZoomScroll = mapType === MapType.Main;
   const map = useMap(mapRef, cityLocation, shouldZoomScroll);
 
   useEffect(() => {

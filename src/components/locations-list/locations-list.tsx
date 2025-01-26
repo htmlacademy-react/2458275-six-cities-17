@@ -1,5 +1,5 @@
 import LocationTab from '../../components/location-tab/location-tab';
-import {CITIES} from '../../consts';
+import {cities} from '../../consts';
 import {OfferCity} from '../../types/offers-types';
 
 type LocationsListProps = {
@@ -10,7 +10,7 @@ function LocationsList({currentCity}: LocationsListProps): JSX.Element {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {CITIES.map((city) => (
+          {cities.map((city) => (
             <LocationTab
               key={city.name}
               city={city}

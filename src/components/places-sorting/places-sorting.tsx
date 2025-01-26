@@ -1,7 +1,7 @@
+import {useState, useEffect, useRef, memo} from 'react';
 import {SortingOption} from '../../consts';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {changeSortingOption} from '../../store/app-process-slice/app-process-slice';
-import {useState, useEffect, useRef, memo} from 'react';
 import {getCurrentSortingOption} from '../../store/app-process-slice/selectors';
 
 function PlacesSortingTemplate():JSX.Element {

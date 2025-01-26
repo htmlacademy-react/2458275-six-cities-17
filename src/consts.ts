@@ -1,4 +1,4 @@
-export const CITIES = [
+export const cities = [
   {
     name: 'Paris',
     location: {
@@ -49,7 +49,7 @@ export const CITIES = [
   }
 ] as const;
 
-export const RATINGS = [
+export const ratings = [
   {
     value: 5,
     title: 'perfect',
@@ -88,7 +88,7 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum MapTypes {
+export enum MapType {
   Main = 'cities',
   Offer = 'offer',
 }
@@ -142,7 +142,7 @@ export const Comment = {
   InitialState: ' ',
 };
 
-export const OfferCardCount = {
+export const OfferCardsCount = {
   Min: 0,
   Max: 3,
 };

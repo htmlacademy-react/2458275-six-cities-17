@@ -12,8 +12,8 @@ import Map from '../../components/map/map';
 import NearPlacesContainer from '../../components/near-places-container/near-places-container';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import ErrorMessage from '../../components/errorMessage/error-message';
-import {MapTypes, OfferCardCount, FavouriteButtonType, ImagesCount} from '../../consts';
 import LoadingPage from '../../pages/loading-page/loading-page';
+import {MapType, OfferCardsCount, FavouriteButtonType, ImagesCount} from '../../consts';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
 import {capitalize, getMapPoints} from '../../utils/common';
@@ -28,7 +28,7 @@ function OfferPage(): JSX.Element {
   const isNearbyPlacesDataLoading = useAppSelector(getNearbyPlacesLoadingStatus);
   const isOfferLoadingError = useAppSelector(getFullOfferErrorStatus);
   const currentOfferData = useAppSelector(getFullOfferData);
-  const nearbyPlaces = useAppSelector(getNearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
+  const nearbyPlaces = useAppSelector(getNearbyPlaces).slice(OfferCardsCount.Min, OfferCardsCount.Max);
 
   const params = useParams();
   const activeOfferId = params.id;
@@ -108,7 +108,7 @@ function OfferPage(): JSX.Element {
               <ReviewsContainer/>
             </div>
           </div>
-          <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
+          <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapType.Offer}/>
         </section>
         <div className="container">
           {nearbyPlaces && <NearPlacesContainer />}

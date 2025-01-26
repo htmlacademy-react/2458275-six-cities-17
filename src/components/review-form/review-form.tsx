@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from 'react';
 import ReviewStar from '../review-star/review-star';
-import {Comment, RATINGS, RATING_INITIAL_VALUE} from '../../consts';
+import {Comment, ratings, RATING_INITIAL_VALUE} from '../../consts';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {postCommentAction} from '../../store/api-actions';
 import {CommentForm} from '../../types/reviews-types';
@@ -57,7 +57,7 @@ function ReviewForm():JSX.Element {
                 Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {RATINGS.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} isChecked={formData.rating === value} isDisabled={isCommentPosting}/>)}
+        {ratings.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} isChecked={formData.rating === value} isDisabled={isCommentPosting}/>)}
       </div>
       <textarea
         className="reviews__textarea form__textarea"

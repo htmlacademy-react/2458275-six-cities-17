@@ -1,6 +1,6 @@
 import {Offer, FullOffer} from '../types/offers-types';
 import {Review} from '../types/reviews-types';
-import {SortingOption, CITIES} from '../consts';
+import {SortingOption, cities} from '../consts';
 
 const capitalize = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
@@ -35,7 +35,7 @@ const getMapPoints = (offers: Offer[], fullOffer?: FullOffer) => {
   return mapPoints;
 };
 
-const getRandomCity = () => CITIES[Math.floor(Math.random() * CITIES.length)];
+const getRandomCity = () => cities[Math.floor(Math.random() * cities.length)];
 
 const sortBy = {
   [SortingOption.Default]: (offers:Offer[]) => [...offers],

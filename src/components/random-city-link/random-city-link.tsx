@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom';
-import {useCallback} from 'react';
 import {useAppDispatch} from '../../hooks/index';
 import {getRandomCity} from '../../utils/common';
 import {changeCity} from '../../store/app-process-slice/app-process-slice';

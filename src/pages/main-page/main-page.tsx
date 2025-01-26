@@ -4,7 +4,6 @@ import LocationsList from '../../components/locations-list/locations-list';
 import PacesEmptyContainer from '../../components/places-container/places-empty-container';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import PlacesContainer from '../../components/places-container/places-container';
-
 import {useAppSelector} from '../../hooks/index';
 import {getOffersData, getOffersLoadingStatus} from '../../store/offers-process-slice/selectors';
 import {getCurrentCity} from '../../store/app-process-slice/selectors';
