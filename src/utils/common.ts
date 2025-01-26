@@ -1,6 +1,6 @@
 import {Offer, FullOffer} from '../types/offers-types';
 import {Review} from '../types/reviews-types';
-import {SortingOption} from '../consts';
+import {SortingOption, CITIES} from '../consts';
 
 const capitalize = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
@@ -35,6 +35,8 @@ const getMapPoints = (offers: Offer[], fullOffer?: FullOffer) => {
   return mapPoints;
 };
 
+const getRandomCity = () => CITIES[Math.floor(Math.random() * CITIES.length)];
+
 const sortBy = {
   [SortingOption.Default]: (offers:Offer[]) => [...offers],
   [SortingOption.MinPriceFirst]: (offers:Offer[]) => [...offers].sort((firstCard, secondCard) => firstCard.price - secondCard.price),
@@ -46,4 +48,4 @@ const sortOffers = (offers:Offer[], chosenSortingOption:SortingOption) => sortBy
 
 const sortReviews = (reviews: Review[]) => reviews.toSorted((reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date));
 
-export {capitalize, getRatingValue, groupOffersByCity, getFormattedDate, getDateWithoutTime, getMapPoints, sortOffers, sortReviews};
+export {capitalize, getRatingValue, groupOffersByCity, getFormattedDate, getDateWithoutTime, getMapPoints, sortOffers, sortReviews, getRandomCity};
