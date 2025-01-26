@@ -13,8 +13,8 @@ function ProfileSignOutNavigationTemplate(): JSX.Element {
   const isFavoritePage = pathname === favoritePageUrl;
   const isAuthorized = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
 
-  const handleLogoutClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault();
+  const handleLogoutClick = (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    evt.preventDefault();
     dispatch(logoutAction()).then(() => {
       if (isAuthorized && isFavoritePage) {
         navigate(AppRoute.Login);
