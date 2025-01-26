@@ -49,6 +49,31 @@ export const CITIES = [
   }
 ] as const;
 
+export const RATINGS = [
+  {
+    value: 5,
+    title: 'perfect',
+  },
+  {
+    value: 4,
+    title: 'good',
+  },
+  {
+    value: 3,
+    title: 'not bad',
+  },
+  {
+    value: 2,
+    title: 'badly',
+  },
+  {
+    value: 1,
+    title: 'terribly',
+  }
+];
+
+export const RATING_INITIAL_VALUE = 0;
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -75,8 +100,8 @@ export enum CardType {
 }
 
 export enum FavouriteButtonType {
-  FullOfferButton = 'OFFER_BUTTON',
-  PlaceCardButton = 'PLACE_CARD_BUTTON',
+  FullOfferButton = 'FullOfferButton',
+  PlaceCardButton = 'PlaceCardButton',
 }
 
 export enum LogoType {
@@ -116,28 +141,6 @@ export enum Status {
   Error = 'Error',
 }
 
-export const RATINGS = [
-  {
-    value: 5,
-    title: 'perfect',
-  },
-  {
-    value: 4,
-    title: 'good',
-  },
-  {
-    value: 3,
-    title: 'not bad',
-  },
-  {
-    value: 2,
-    title: 'badly',
-  },
-  {
-    value: 1,
-    title: 'terribly',
-  }
-];
 export const Comment = {
   MinLength: 50,
   MaxLength: 300,
@@ -170,6 +173,3 @@ export const MapIcon = {
     MapIconInfo
   },
 };
-
-export const RATING_INITIAL_VALUE = 0;
-
