@@ -21,6 +21,7 @@ export const userProcessSlice = createSlice({
         state.userData = action.payload;
       })
       .addCase(checkAuthAction.rejected, (state) => {
+        toast.warn('You are not authorized. Please log in to get access to your favorites list');
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
