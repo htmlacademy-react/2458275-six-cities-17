@@ -134,13 +134,6 @@ export enum NameSpace {
   Favorite = 'Favorite',
 }
 
-export enum Status {
-  Idle = 'Idle',
-  Loading= 'Loading',
-  Success = 'Success',
-  Error = 'Error',
-}
-
 export const Comment = {
   MinLength: 50,
   MaxLength: 300,

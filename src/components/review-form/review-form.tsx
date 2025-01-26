@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from 'react';
 import ReviewStar from '../review-star/review-star';
-import {Comment, RATINGS, RATING_INITIAL_VALUE, Status} from '../../consts';
+import {Comment, RATINGS, RATING_INITIAL_VALUE} from '../../consts';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {postCommentAction} from '../../store/api-actions';
 import {CommentForm} from '../../types/reviews-types';
@@ -22,7 +22,7 @@ function ReviewForm():JSX.Element {
   const isSubmitButtonDisabled = formData.rating === RATING_INITIAL_VALUE
   || formData.comment.length < Comment.MinLength
   || formData.comment.length > Comment.MaxLength
-  || isCommentPosting === Status.Loading;
+  || isCommentPosting;
 
   const handleValueChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>):void => {
     const {value} = evt.target;
@@ -57,7 +57,7 @@ function ReviewForm():JSX.Element {
                 Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {RATINGS.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} isChecked={formData.rating === value} isDisabled={isCommentPosting === Status.Loading}/>)}
+        {RATINGS.map(({value, title}) => <ReviewStar key={value} starsCount={value} starsCountMeaning={title} onChange={handleValueChange} isChecked={formData.rating === value} isDisabled={isCommentPosting}/>)}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
@@ -66,7 +66,7 @@ function ReviewForm():JSX.Element {
         value={formData.comment}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleValueChange}
-        disabled={isCommentPosting === Status.Loading}
+        disabled={isCommentPosting}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -80,7 +80,7 @@ function ReviewForm():JSX.Element {
           type="submit"
           disabled={isSubmitButtonDisabled}
         >
-          {isCommentPosting === Status.Loading ? 'Submitting' : 'Submit'}
+          {isCommentPosting ? 'Submitting' : 'Submit'}
         </button>
       </div>
     </form>
