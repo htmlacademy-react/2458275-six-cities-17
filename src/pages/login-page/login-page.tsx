@@ -1,9 +1,17 @@
 import {Helmet} from 'react-helmet-async';
+import {useNavigate} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import LoginForm from '../../components/login-form/login-form';
-import {LogoType} from '../../consts';
+import {LogoType, AuthorizationStatus, AppRoute} from '../../consts';
+import {getAuthorizationStatus} from '../../store/user-process-slice/selectors';
+import {useAppSelector} from '../../hooks/index';
 
 function LoginPage(): JSX.Element {
+  const navigate = useNavigate();
+  const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
+  if (currentAuthorizationStatus === AuthorizationStatus.Auth) {
+    navigate(AppRoute.Main);
+  }
 
   return (
     <div className="page page--gray page--login">
