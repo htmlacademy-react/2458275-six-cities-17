@@ -1,5 +1,5 @@
-import {LogoType} from '../../consts';
 import {Helmet} from 'react-helmet-async';
+import {LogoType} from '../../consts';
 import {useAppSelector} from '../../hooks/index';
 import {getFavoriteOffersData, getFavoriteOffersLoadingStatus} from '../../store/favorite-process-slice/selectors';
 import LoadingPage from '../../pages/loading-page/loading-page';

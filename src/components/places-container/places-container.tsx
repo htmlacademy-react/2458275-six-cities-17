@@ -3,7 +3,7 @@ import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {useAppSelector} from '../../hooks/index';
-import {CardType, MapTypes} from '../../consts';
+import {CardType, MapType} from '../../consts';
 import {sortOffers, getMapPoints} from '../../utils/common';
 import {OfferCity, Offer} from '../../types/offers-types';
 import {getCurrentSortingOption} from '../../store/app-process-slice/selectors';
@@ -38,7 +38,7 @@ function PlacesContainer({currentLocation, offers}: currentLocationProps): JSX.E
         <OffersList onActiveOfferCardChange={handleActiveOfferCardChange} offers={sortedCityOffers} cardType={CardType.Main}/>
       </section>
       <div className="cities__right-section">
-        <Map mapPoints={mapPoints} cityLocation={currentLocation.location} activeOffer={activeOfferCard} mapType={MapTypes.Main}/>
+        <Map mapPoints={mapPoints} cityLocation={currentLocation.location} activeOffer={activeOfferCard} mapType={MapType.Main}/>
       </div>
     </div>
   );

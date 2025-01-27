@@ -1,5 +1,5 @@
 import {store} from '../store/index';
-import {AuthorizationStatus, SortingOption, Status} from '../consts';
+import {AuthorizationStatus, SortingOption} from '../consts';
 import {UserData} from '../types/user-data';
 import {Offer, OfferCity, FullOffer} from '../types/offers-types';
 import {Review} from '../types/reviews-types';
@@ -25,12 +25,13 @@ export type FullOfferProcess = {
   fullOfferData: FullOffer | null;
   nearbyPlaces: Offer[];
   isFullOfferDataLoading: boolean;
+  isFullOfferLoadingError: boolean;
   isNearbyPlacesDataLoading: boolean;
 }
 
 export type ReviewProcess = {
   reviews: Review[];
-  newReviewPostingStatus: Status;
+  isNewReviewPosting: boolean;
   isReviewsDataLoading: boolean;
 }
 

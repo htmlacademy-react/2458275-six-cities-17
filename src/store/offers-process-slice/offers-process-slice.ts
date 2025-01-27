@@ -24,7 +24,7 @@ export const offersProcessSlice = createSlice({
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isOffersDataLoading = false;
-        toast.warn('Something went wrong while loading offers. Please try again');
+        toast.error('Something went wrong while loading offers. Please try again');
       });
   }
 });

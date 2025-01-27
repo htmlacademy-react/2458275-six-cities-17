@@ -1,10 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {NameSpace, CITIES, SortingOption} from '../../consts';
+import {NameSpace, cities, SortingOption} from '../../consts';
 import {AppProcess} from '../../types/state-types';
 import {OfferCity} from '../../types/offers-types';
 
 const initialState: AppProcess = {
-  currentCity: CITIES[0],
+  currentCity: cities[0],
   currentSortingOption: SortingOption.Default,
 };
 

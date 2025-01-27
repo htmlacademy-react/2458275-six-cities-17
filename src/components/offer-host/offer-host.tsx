@@ -1,13 +1,14 @@
+import {memo} from 'react';
 type OfferHostProps = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
 }
-function OfferHost({name, avatarUrl, isPro}: OfferHostProps): JSX.Element {
-
+function OfferHostTemplate({name, avatarUrl, isPro}: OfferHostProps): JSX.Element {
+  const avatarClassName = `offer__avatar-wrapper user__avatar-wrapper ${isPro && 'offer__avatar-wrapper--pro'}`;
   return (
     <div className="offer__host-user user">
-      <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+      <div className={avatarClassName}>
         <img
           className="offer__avatar user__avatar"
           src={avatarUrl}
@@ -22,5 +23,5 @@ function OfferHost({name, avatarUrl, isPro}: OfferHostProps): JSX.Element {
   );
 
 }
-
+const OfferHost = memo(OfferHostTemplate);
 export default OfferHost;

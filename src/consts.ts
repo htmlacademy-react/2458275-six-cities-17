@@ -1,4 +1,4 @@
-export const CITIES = [
+export const cities = [
   {
     name: 'Paris',
     location: {
@@ -49,12 +49,37 @@ export const CITIES = [
   }
 ] as const;
 
+export const ratings = [
+  {
+    value: 5,
+    title: 'perfect',
+  },
+  {
+    value: 4,
+    title: 'good',
+  },
+  {
+    value: 3,
+    title: 'not bad',
+  },
+  {
+    value: 2,
+    title: 'badly',
+  },
+  {
+    value: 1,
+    title: 'terribly',
+  }
+];
+
+export const RATING_INITIAL_VALUE = 0;
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
-  NotFound = '404',
+  NotFound = '*',
 }
 
 export enum AuthorizationStatus {
@@ -63,7 +88,7 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum MapTypes {
+export enum MapType {
   Main = 'cities',
   Offer = 'offer',
 }
@@ -75,8 +100,8 @@ export enum CardType {
 }
 
 export enum FavouriteButtonType {
-  FullOfferButton = 'OFFER_BUTTON',
-  PlaceCardButton = 'PLACE_CARD_BUTTON',
+  FullOfferButton = 'FullOfferButton',
+  PlaceCardButton = 'PlaceCardButton',
 }
 
 export enum LogoType {
@@ -109,44 +134,15 @@ export enum NameSpace {
   Favorite = 'Favorite',
 }
 
-export enum Status {
-  Idle = 'Idle',
-  Loading= 'Loading',
-  Success = 'Success',
-  Error = 'Error',
-}
-
-export const RATINGS = [
-  {
-    value: 5,
-    title: 'perfect',
-  },
-  {
-    value: 4,
-    title: 'good',
-  },
-  {
-    value: 3,
-    title: 'not bad',
-  },
-  {
-    value: 2,
-    title: 'badly',
-  },
-  {
-    value: 1,
-    title: 'terribly',
-  }
-];
 export const Comment = {
   MinLength: 50,
   MaxLength: 300,
   MinAmount: 0,
   MaxAmount: 10,
-  InitialState: ' ',
+  InitialState: '',
 };
 
-export const OfferCardCount = {
+export const OfferCardsCount = {
   Min: 0,
   Max: 3,
 };
@@ -170,6 +166,3 @@ export const MapIcon = {
     MapIconInfo
   },
 };
-
-export const RATING_INITIAL_VALUE = 0;
-

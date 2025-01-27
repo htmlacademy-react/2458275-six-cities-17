@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import OfferCard from '../offer-card/offer-card';
 import {Offer} from '../../types/offers-types';
 
@@ -6,11 +7,11 @@ type OffersListProps = {
   onActiveOfferCardChange?: (id: string | null) => void;
   cardType: string;
 }
-const getListClassName = (cardType: string) => (cardType === 'favorites' ? 'favorites__places' : `places__list ${cardType === 'cities' ? 'cities__places-list tabs__content' : 'near-places__list'}`);
 
-function OffersList({offers, cardType, onActiveOfferCardChange}: OffersListProps): JSX.Element {
+function OffersListTemplate({offers, cardType, onActiveOfferCardChange}: OffersListProps): JSX.Element {
+  const listClassName = cardType === 'favorites' ? 'favorites__places' : `places__list ${cardType === 'cities' ? 'cities__places-list tabs__content' : 'near-places__list'}`;
   return (
-    <div className={getListClassName(cardType)}>
+    <div className={listClassName}>
       {
         offers.map((offer) => (
           <OfferCard
@@ -23,5 +24,6 @@ function OffersList({offers, cardType, onActiveOfferCardChange}: OffersListProps
     </div>
   );
 }
+const OffersList = memo(OffersListTemplate);
 
 export default OffersList;

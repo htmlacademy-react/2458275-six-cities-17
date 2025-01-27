@@ -1,3 +1,6 @@
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {HelmetProvider} from 'react-helmet-async';
+
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -5,22 +8,9 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
 import PrivateRoute from '../private-route/private-route';
 
-import {AppRoute, AuthorizationStatus} from '../../consts';
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import {useEffect} from 'react';
-import {HelmetProvider} from 'react-helmet-async';
-import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import {getAuthorizationStatus} from '../../store/user-process-slice/selectors';
-import {fetchFavoriteOffersAction} from '../../store/api-actions.ts';
+import {AppRoute} from '../../consts';
 
 function App(): JSX.Element {
-  const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  useEffect (() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(fetchFavoriteOffersAction());
-    }
-  }, [authorizationStatus, dispatch]);
 
   return (
     <HelmetProvider>

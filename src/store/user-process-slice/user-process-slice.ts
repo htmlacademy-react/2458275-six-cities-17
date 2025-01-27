@@ -21,6 +21,7 @@ export const userProcessSlice = createSlice({
         state.userData = action.payload;
       })
       .addCase(checkAuthAction.rejected, (state) => {
+        toast.warn('You are not authorized. Please log in to get access to your favorites list');
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
@@ -32,7 +33,7 @@ export const userProcessSlice = createSlice({
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.userData = null;
-        toast.warn('Something went wrong while trying to log in. Please try again');
+        toast.error('Something went wrong while trying to log in. Please try again');
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
@@ -41,7 +42,7 @@ export const userProcessSlice = createSlice({
       })
       .addCase(logoutAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
-        toast.warn('Something went wrong while trying to log out. Please try again');
+        toast.error('Something went wrong while trying to log out. Please try again');
       });
   }
 });

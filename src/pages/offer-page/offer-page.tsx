@@ -6,18 +6,19 @@ import FavoriteButton from '../../components/favorite-button/favorite-button';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import Rating from '../../components/rating/rating';
 import OfferHost from '../../components/offer-host/offer-host';
-import OffersList from '../../components/offers-list/offers-list';
 import ReviewsContainer from '../../components/reviews-container/reviews-container';
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
 import Map from '../../components/map/map';
+import NearPlacesContainer from '../../components/near-places-container/near-places-container';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import {CardType, MapTypes, OfferCardCount, FavouriteButtonType, ImagesCount} from '../../consts';
+import ErrorMessage from '../../components/errorMessage/error-message';
 import LoadingPage from '../../pages/loading-page/loading-page';
+import {MapType, OfferCardsCount, FavouriteButtonType, ImagesCount} from '../../consts';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {fetchOfferDataAction, fetchOfferReviewsAction, fetchNearbyPlacesAction} from '../../store/api-actions';
 import {capitalize, getMapPoints} from '../../utils/common';
 import {getCurrentCity} from '../../store/app-process-slice/selectors';
-import {getFullOfferLoadingStatus, getNearbyPlacesLoadingStatus, getFullOfferData, getNearbyPlaces} from '../../store/full-offer-process-slice/selectors';
+import {getFullOfferLoadingStatus, getNearbyPlacesLoadingStatus, getFullOfferData, getNearbyPlaces, getFullOfferErrorStatus} from '../../store/full-offer-process-slice/selectors';
 import {getReviewsLoadingStatus} from '../../store/review-process-slice/selectors';
 
 function OfferPage(): JSX.Element {
@@ -25,8 +26,9 @@ function OfferPage(): JSX.Element {
   const isFullOfferLoading = useAppSelector(getFullOfferLoadingStatus);
   const isReviewsDataLoading = useAppSelector(getReviewsLoadingStatus);
   const isNearbyPlacesDataLoading = useAppSelector(getNearbyPlacesLoadingStatus);
+  const isOfferLoadingError = useAppSelector(getFullOfferErrorStatus);
   const currentOfferData = useAppSelector(getFullOfferData);
-  const nearbyPlaces = useAppSelector(getNearbyPlaces).slice(OfferCardCount.Min, OfferCardCount.Max);
+  const nearbyPlaces = useAppSelector(getNearbyPlaces).slice(OfferCardsCount.Min, OfferCardsCount.Max);
 
   const params = useParams();
   const activeOfferId = params.id;
@@ -51,6 +53,10 @@ function OfferPage(): JSX.Element {
 
   if (!currentOfferData) {
     return <NotFoundPage />;
+  }
+
+  if (isOfferLoadingError) {
+    return <ErrorMessage />;
   }
 
   const { isPremium, description, rating, type, bedrooms, maxAdults, price, title, goods, host, images } = currentOfferData;
@@ -86,7 +92,7 @@ function OfferPage(): JSX.Element {
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">{price}</b>
+                <b className="offer__price-value">&euro;{price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <OfferInsideList goods={goods}/>
@@ -102,19 +108,10 @@ function OfferPage(): JSX.Element {
               <ReviewsContainer/>
             </div>
           </div>
-          <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapTypes.Offer}/>
+          <Map mapPoints={mapPoints} cityLocation={currentCity.location} activeOffer={activeOfferId} mapType={MapType.Offer}/>
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">
-          Other places in the neighbourhood
-            </h2>
-            {nearbyPlaces && (
-              <div className="near-places__list places__list">
-                <OffersList offers={nearbyPlaces} cardType={CardType.Offer}/>
-              </div>
-            )}
-          </section>
+          {nearbyPlaces && <NearPlacesContainer />}
         </div>
       </main>
     </div>
