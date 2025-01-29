@@ -166,3 +166,25 @@ export const MapIcon = {
     MapIconInfo
   },
 };
+
+export const BookmarkSize = {
+  FullOffer: {
+    width: '31',
+    height: '33',
+  },
+  PlaceCard: {
+    width: '18',
+    height: '19',
+  },
+};
+
+export const CardSize = {
+  FavoritesCard: {
+    width: '150',
+    height: '110',
+  },
+  PlaceCard: {
+    width: '260',
+    height: '200',
+  },
+};
