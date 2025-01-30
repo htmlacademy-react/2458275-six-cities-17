@@ -49,6 +49,8 @@ export const cities = [
   }
 ] as const;
 
+export const accommodationTypes = ['apartment', 'room', 'house', 'hotel'] as const;
+
 export const ratings = [
   {
     value: 5,
