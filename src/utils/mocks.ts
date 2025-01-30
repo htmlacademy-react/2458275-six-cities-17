@@ -75,3 +75,8 @@ export const mockOffers = new Array(20).fill(null).map(() => makeFakeOffer());
 export const mockReviews = new Array(10).fill(null).map(() => makeFakeReview());
 export const mockFavoriteOffer = { ...makeFakeOffer(), isFavorite: true };
 export const mockNotFavoriteOffer = { ...makeFakeOffer(), isFavorite: false };
+
+export const mockAuthData = {
+  email: internet.email(),
+  password: datatype.string(),
+};
