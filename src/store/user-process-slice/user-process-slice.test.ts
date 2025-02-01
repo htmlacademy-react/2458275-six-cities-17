@@ -49,10 +49,7 @@ describe('UserProcess Slice', () => {
       userData: null
     };
 
-    const result = userProcessSlice.reducer(
-      initialState,
-      checkAuthAction.rejected
-    );
+    const result = userProcessSlice.reducer(initialState, checkAuthAction.rejected);
     expect(result).toEqual(expectedState);
   });
 

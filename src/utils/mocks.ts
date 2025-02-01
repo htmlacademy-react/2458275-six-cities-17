@@ -80,3 +80,12 @@ export const mockAuthData = {
   email: internet.email(),
   password: datatype.string(),
 };
+
+export const mockReviewData = {
+  id: datatype.string(),
+  comment: {
+    rating: datatype.number(),
+    comment: datatype.string(),
+  }
+};
+
