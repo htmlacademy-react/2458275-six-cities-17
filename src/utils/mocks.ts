@@ -3,6 +3,10 @@ import {Offer, OfferCity, OfferHostInfo, FullOffer, Location} from '../types/off
 import {Review} from '../types/reviews-types';
 import {UserData} from '../types/user-data';
 import {getRandomCity, getRandomAccommodation} from '../utils/common';
+import {Action} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {createAPI} from '../services/api';
+import {State} from '../types/state-types';
 
 export const makeFakeOfferLocation = ():Location => ({
   latitude: Number(address.latitude()),
@@ -81,11 +85,16 @@ export const mockAuthData = {
   password: datatype.string(),
 };
 
-export const mockReviewData = {
-  id: datatype.string(),
-  comment: {
-    rating: datatype.number(),
-    comment: datatype.string(),
-  }
+export const mockComment = {
+  rating: datatype.number(),
+  comment: datatype.string(),
 };
 
+export const mockReviewData = {
+  id: datatype.string(),
+  comment: mockComment,
+};
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
+
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
